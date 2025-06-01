@@ -19,6 +19,8 @@ type
     DataSource1: TDataSource;
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
     TabControl1: TTabControl;
+    Label1: TLabel;
+    Edit1: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure TabControl1Change(Sender: TObject);
@@ -93,7 +95,15 @@ end;
 procedure TForm1.TabControl1Change(Sender: TObject);
 begin
   if TabControl1.TabIndex = TabControl1.Tabs.Count - 1  then
-    ShowMessage('Hello!');
+  begin
+    Label1.Visible := True;
+    Edit1.Visible := True;
+  end
+  else
+  begin
+    Label1.Visible := False;
+    Edit1.Visible := False;
+  end;
 end;
 
 end.
