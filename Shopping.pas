@@ -21,9 +21,14 @@ type
     TabControl1: TTabControl;
     Label1: TLabel;
     Edit1: TEdit;
+    FDQuery2: TFDQuery;
+    Button1: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure TabControl1Change(Sender: TObject);
+    procedure show_stores(Sender: TObject);
+    procedure new_store(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     sql: string;
@@ -38,6 +43,29 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.new_store(Sender: TObject);
+var
+  StoreTabs: TStringList;
+begin
+  if Edit1.Text <> '' then
+  begin
+    sql := 'INSERT INTO list (name) VALUES ("' + Edit1.Text + '")';
+    //showmessage(sql);
+    FDConnection1.ExecSQL(sql);
+    StoreTabs := TStringList.Create;
+    StoreTabs.Sorted := True;
+    StoreTabs.Assign(TabControl1.Tabs);
+    StoreTabs.Add(Edit1.Text);
+    TabControl1.Tabs := StoreTabs;
+    Edit1.Text := '';
+  end;
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  new_store(Sender);
+end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
@@ -65,7 +93,7 @@ begin
   end;
 end;
 
-procedure TForm1.FormShow(Sender: TObject);
+procedure TForm1.show_stores(Sender: TObject);
 var
   i: integer;
 begin
@@ -75,6 +103,7 @@ begin
   begin
     list_names := TStringList.Create;
     try
+      list_names.Add('+');
       i := 0;
       FDQuery1.First;
       while not FDQuery1.Eof do
@@ -83,26 +112,34 @@ begin
         Inc(i);
         FDQuery1.Next;
       end;
-      list_names.Add('+');
       TabControl1.Tabs := list_names;
     finally
       list_names.Free;
     end;
   end;
-  FDQuery1.Close;
+  Form1.FDQuery1.Close;
+end;
+
+procedure TForm1.FormShow(Sender: TObject);
+var
+  i: integer;
+begin
+  show_stores(Sender);
 end;
 
 procedure TForm1.TabControl1Change(Sender: TObject);
 begin
-  if TabControl1.TabIndex = TabControl1.Tabs.Count - 1  then
+  if TabControl1.TabIndex = 0  then
   begin
     Label1.Visible := True;
     Edit1.Visible := True;
+    Button1.Visible := True;
   end
   else
   begin
     Label1.Visible := False;
     Edit1.Visible := False;
+    Button1.Visible := False;
   end;
 end;
 

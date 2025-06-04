@@ -27,7 +27,6 @@ object Form1: TForm1
       Width = 56
       Height = 15
       Caption = 'New store:'
-      Visible = False
     end
     object Edit1: TEdit
       Left = 94
@@ -35,7 +34,16 @@ object Form1: TForm1
       Width = 121
       Height = 23
       TabOrder = 0
-      Visible = False
+      OnEnter = new_store
+    end
+    object Button1: TButton
+      Left = 221
+      Top = 44
+      Width = 75
+      Height = 25
+      Caption = 'Submit'
+      TabOrder = 1
+      OnClick = Button1Click
     end
   end
   object FDConnection1: TFDConnection
@@ -60,6 +68,11 @@ object Form1: TForm1
   end
   object FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink
     Left = 264
+    Top = 352
+  end
+  object FDQuery2: TFDQuery
+    Connection = FDConnection1
+    Left = 464
     Top = 352
   end
 end
