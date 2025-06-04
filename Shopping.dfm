@@ -45,6 +45,16 @@ object Form1: TForm1
       TabOrder = 1
       OnClick = Button1Click
     end
+    object Button2: TButton
+      Left = 488
+      Top = 44
+      Width = 99
+      Height = 25
+      Caption = 'Remove store'
+      TabOrder = 2
+      Visible = False
+      OnClick = Button2Click
+    end
   end
   object FDConnection1: TFDConnection
     Params.Strings = (

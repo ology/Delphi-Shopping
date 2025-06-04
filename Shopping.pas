@@ -23,12 +23,14 @@ type
     Edit1: TEdit;
     FDQuery2: TFDQuery;
     Button1: TButton;
+    Button2: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure TabControl1Change(Sender: TObject);
     procedure show_stores(Sender: TObject);
     procedure new_store(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
     sql: string;
@@ -65,6 +67,19 @@ end;
 procedure TForm1.Button1Click(Sender: TObject);
 begin
   new_store(Sender);
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+var
+  index: integer;
+  caption: string;
+begin
+  index := TabControl1.TabIndex;
+  caption := TabControl1.Tabs[index];
+  sql := 'DELETE FROM list WHERE name = "' + caption + '"';
+  showmessage(sql);
+  FDConnection1.ExecSQL(sql);
+  TabControl1.Tabs.Delete(TabControl1.TabIndex);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -134,12 +149,14 @@ begin
     Label1.Visible := True;
     Edit1.Visible := True;
     Button1.Visible := True;
+    Button2.Visible := False;
   end
   else
   begin
     Label1.Visible := False;
     Edit1.Visible := False;
     Button1.Visible := False;
+    Button2.Visible := True;
   end;
 end;
 
