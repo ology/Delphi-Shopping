@@ -53,6 +53,26 @@ implementation
 
 {$R *.dfm}
 
+procedure ShowFirstTab();
+begin
+  Form1.Label1.Visible := True;
+  Form1.Edit1.Visible := True;
+  Form1.Button1.Visible := True;
+  Form1.Button2.Visible := False;
+  Form1.DBGrid1.Visible := False;
+end;
+
+procedure ShowStoreTab();
+begin
+  Form1.Label1.Visible := False;
+  Form1.Edit1.Visible := False;
+  Form1.Button1.Visible := False;
+  Form1.Button2.Visible := True;
+  Form1.DBGrid1.Visible := True;
+  Form1.FDQuery6.Close;
+  Form1.FDQuery6.open;
+end;
+
 procedure TForm1.new_store(Sender: TObject);
 var
   StoreTabs: TStringList;
@@ -96,11 +116,7 @@ begin
   end;
   TabControl1.Tabs.Delete(TabControl1.TabIndex);
   TabControl1.TabIndex := 0;
-  Label1.Visible := True;
-  Edit1.Visible := True;
-  Button1.Visible := True;
-  Button2.Visible := False;
-  DBGrid1.Visible := False;
+  ShowFirstTab();
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -155,26 +171,6 @@ var
   i: integer;
 begin
   show_stores(Sender);
-end;
-
-procedure ShowFirstTab();
-begin
-  Form1.Label1.Visible := True;
-  Form1.Edit1.Visible := True;
-  Form1.Button1.Visible := True;
-  Form1.Button2.Visible := False;
-  Form1.DBGrid1.Visible := False;
-end;
-
-procedure ShowStoreTab();
-begin
-  Form1.Label1.Visible := False;
-  Form1.Edit1.Visible := False;
-  Form1.Button1.Visible := False;
-  Form1.Button2.Visible := True;
-  Form1.DBGrid1.Visible := True;
-  Form1.FDQuery6.Close;
-  Form1.FDQuery6.open;
 end;
 
 procedure TForm1.TabControl1Change(Sender: TObject);
