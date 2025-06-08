@@ -62,7 +62,7 @@ begin
   Form1.DBGrid1.Visible := False;
 end;
 
-procedure ShowStoreTab();
+procedure ShowStoreTab(id: integer);
 begin
   Form1.Label1.Visible := False;
   Form1.Edit1.Visible := False;
@@ -81,10 +81,11 @@ begin
   begin
     try
       FDQuery2.ParamByName('name').AsString := Edit1.Text;
+      FDQuery2.ParamByName('tab').AsInteger := TabControl1.TabIndex;
       FDQuery2.ExecSQL;
     except
       on E: Exception do
-      ShowMessage('Error creating tables: ' + E.Message);
+      ShowMessage('Error creating record: ' + E.Message);
     end;
     StoreTabs := TStringList.Create;
     StoreTabs.Sorted := True;
@@ -178,7 +179,7 @@ begin
   if TabControl1.TabIndex = 0 then
     ShowFirstTab()
   else
-    ShowStoreTab();
+    ShowStoreTab(TabControl1.TabIndex);
 end;
 
 end.

@@ -83,7 +83,7 @@ object Form1: TForm1
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'SELECT id,name FROM stores ORDER BY LOWER(name)')
+      'SELECT id,name,tab FROM stores ORDER BY LOWER(name)')
     Left = 384
     Top = 352
   end
@@ -98,12 +98,16 @@ object Form1: TForm1
   object FDQuery2: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'INSERT INTO stores (name) VALUES (:name)')
+      'INSERT INTO stores (name, tab) VALUES (:name, :tab)')
     Left = 456
     Top = 352
     ParamData = <
       item
         Name = 'NAME'
+        ParamType = ptInput
+      end
+      item
+        Name = 'TAB'
         ParamType = ptInput
       end>
   end
@@ -124,7 +128,8 @@ object Form1: TForm1
     SQL.Strings = (
       'CREATE TABLE IF NOT EXISTS stores ('
       'id INTEGER PRIMARY KEY AUTOINCREMENT, '
-      'name TEXT)')
+      'name TEXT,'
+      'tab INTEGER)')
     Left = 384
     Top = 296
   end
