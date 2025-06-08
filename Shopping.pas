@@ -93,6 +93,8 @@ begin
     StoreTabs.Add(Edit1.Text);
     TabControl1.Tabs := StoreTabs;
     Edit1.Text := '';
+    TabControl1.TabIndex := TabControl1.Tabs.Count - 1;
+    ShowStoreTab(TabControl1.Tabs.Count - 1);
   end;
 end;
 
