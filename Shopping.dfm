@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Name = 'Segoe UI'
   Font.Style = []
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   TextHeight = 15
   object TabControl1: TTabControl
@@ -55,6 +56,20 @@ object Form1: TForm1
       Visible = False
       OnClick = Button2Click
     end
+    object DBGrid1: TDBGrid
+      Left = 32
+      Top = 96
+      Width = 555
+      Height = 185
+      DataSource = DataSource1
+      TabOrder = 3
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'Segoe UI'
+      TitleFont.Style = []
+      Visible = False
+    end
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
@@ -62,13 +77,13 @@ object Form1: TForm1
       
         'Database=C:\Users\diamo\Documents\Embarcadero\Studio\Projects\Sh' +
         'opping\Shopping.db')
-    Left = 48
+    Left = 56
     Top = 352
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'SELECT id,name FROM list ORDER BY LOWER(name)')
+      'SELECT id,name FROM stores ORDER BY LOWER(name)')
     Left = 384
     Top = 352
   end
@@ -83,7 +98,7 @@ object Form1: TForm1
   object FDQuery2: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'INSERT INTO list (name) VALUES (:name)')
+      'INSERT INTO stores (name) VALUES (:name)')
     Left = 456
     Top = 352
     ParamData = <
@@ -95,7 +110,7 @@ object Form1: TForm1
   object FDQuery3: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'DELETE FROM list WHERE name = :name')
+      'DELETE FROM stores WHERE name = :name')
     Left = 528
     Top = 352
     ParamData = <
@@ -107,25 +122,39 @@ object Form1: TForm1
   object FDQuery4: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'CREATE TABLE IF NOT EXISTS list ('
+      'CREATE TABLE IF NOT EXISTS stores ('
       'id INTEGER PRIMARY KEY AUTOINCREMENT, '
       'name TEXT)')
-    Left = 416
+    Left = 384
     Top = 296
   end
   object FDQuery5: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'CREATE TABLE IF NOT EXISTS item ('
+      'CREATE TABLE IF NOT EXISTS items ('
       'id INTEGER PRIMARY KEY AUTOINCREMENT,'
       'name TEXT,'
       'note TEXT,'
       'category TEXT,'
-      'cost NUMBER,'
+      'price NUMBER,'
       'quantity INTEGER,'
-      'list_id INTEGER,'
+      'store_id INTEGER,'
       'assigned INTEGER)')
-    Left = 496
+    Left = 456
+    Top = 296
+  end
+  object FDQuery6: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select'
+      'id,'
+      'name,'
+      'category,'
+      'price,'
+      'quantity,'
+      'note'
+      'from items')
+    Left = 528
     Top = 296
   end
 end

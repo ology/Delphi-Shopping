@@ -10,7 +10,8 @@ uses
   FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.SQLiteWrapper.Stat, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.FormTabsBar, Vcl.ComCtrls;
+  FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.FormTabsBar, Vcl.ComCtrls, Vcl.Grids,
+  Vcl.DBGrids;
 
 type
   TForm1 = class(TForm)
@@ -27,6 +28,8 @@ type
     Edit1: TEdit;
     Button1: TButton;
     Button2: TButton;
+    DBGrid1: TDBGrid;
+    FDQuery6: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure TabControl1Change(Sender: TObject);
@@ -34,10 +37,11 @@ type
     procedure new_store(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     sql: string;
-    list_names: TStringList;
+    store_names: TStringList;
   public
     { Public declarations }
   end;
@@ -89,11 +93,19 @@ begin
     if not FDConnection1.Connected then
       FDConnection1.Open;
     FDQuery4.ExecSQL;
-    FDQuery4.ExecSQL;
+    FDQuery5.ExecSQL;
   except
     on E: Exception do
     ShowMessage('Error creating tables: ' + E.Message);
   end;
+  store_names := TStringList.Create;
+  store_names.Add('+');
+  TabControl1.Tabs := store_names;
+end;
+
+procedure TForm1.FormDestroy(Sender: TObject);
+begin
+  store_names.Free;
 end;
 
 procedure TForm1.show_stores(Sender: TObject);
@@ -104,20 +116,17 @@ begin
   FDQuery1.Open;
   if FDQuery1.RecordCount > 0 then
   begin
-    list_names := TStringList.Create;
     try
-      list_names.Add('+');
       i := 0;
       FDQuery1.First;
       while not FDQuery1.Eof do
       begin
-        list_names.Add(FDQuery1.FieldByName('name').AsString);
+        store_names.Add(FDQuery1.FieldByName('name').AsString);
         Inc(i);
         FDQuery1.Next;
       end;
-      TabControl1.Tabs := list_names;
+      TabControl1.Tabs := store_names;
     finally
-      list_names.Free;
     end;
   end;
   FDQuery1.Close;
@@ -132,12 +141,13 @@ end;
 
 procedure TForm1.TabControl1Change(Sender: TObject);
 begin
-  if TabControl1.TabIndex = 0  then
+  if TabControl1.TabIndex = 0 then
   begin
     Label1.Visible := True;
     Edit1.Visible := True;
     Button1.Visible := True;
     Button2.Visible := False;
+    DBGrid1.Visible := False;
   end
   else
   begin
@@ -145,6 +155,9 @@ begin
     Edit1.Visible := False;
     Button1.Visible := False;
     Button2.Visible := True;
+    DBGrid1.Visible := True;
+    FDQuery6.Close;
+    FDQuery6.open;
   end;
 end;
 
