@@ -115,7 +115,7 @@ begin
     on E: Exception do
     ShowMessage('Error deleting record: ' + E.Message);
   end;
-  TabControl1.Tabs.Delete(TabControl1.TabIndex);
+  TabControl1.Tabs.Delete(index);
   TabControl1.TabIndex := 0;
   ShowFirstTab();
 end;
