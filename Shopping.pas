@@ -81,7 +81,7 @@ begin
   begin
     try
       FDQuery2.ParamByName('name').AsString := Edit1.Text;
-      FDQuery2.ParamByName('tab').AsInteger := TabControl1.TabIndex;
+      FDQuery2.ParamByName('tab').AsInteger := TabControl1.Tabs.Count;
       FDQuery2.ExecSQL;
     except
       on E: Exception do
