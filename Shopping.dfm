@@ -82,7 +82,50 @@ object Form1: TForm1
   end
   object FDQuery2: TFDQuery
     Connection = FDConnection1
-    Left = 464
+    SQL.Strings = (
+      'INSERT INTO list (name) VALUES (:name)')
+    Left = 456
     Top = 352
+    ParamData = <
+      item
+        Name = 'NAME'
+        ParamType = ptInput
+      end>
+  end
+  object FDQuery3: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'DELETE FROM list WHERE name = :name')
+    Left = 528
+    Top = 352
+    ParamData = <
+      item
+        Name = 'NAME'
+        ParamType = ptInput
+      end>
+  end
+  object FDQuery4: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'CREATE TABLE IF NOT EXISTS list ('
+      'id INTEGER PRIMARY KEY AUTOINCREMENT, '
+      'name TEXT)')
+    Left = 416
+    Top = 296
+  end
+  object FDQuery5: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'CREATE TABLE IF NOT EXISTS item ('
+      'id INTEGER PRIMARY KEY AUTOINCREMENT,'
+      'name TEXT,'
+      'note TEXT,'
+      'category TEXT,'
+      'cost NUMBER,'
+      'quantity INTEGER,'
+      'list_id INTEGER,'
+      'assigned INTEGER)')
+    Left = 496
+    Top = 296
   end
 end

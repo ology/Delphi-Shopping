@@ -16,12 +16,15 @@ type
   TForm1 = class(TForm)
     FDConnection1: TFDConnection;
     FDQuery1: TFDQuery;
+    FDQuery2: TFDQuery;
+    FDQuery3: TFDQuery;
+    FDQuery4: TFDQuery;
+    FDQuery5: TFDQuery;
     DataSource1: TDataSource;
     FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
     TabControl1: TTabControl;
     Label1: TLabel;
     Edit1: TEdit;
-    FDQuery2: TFDQuery;
     Button1: TButton;
     Button2: TButton;
     procedure FormCreate(Sender: TObject);
@@ -52,9 +55,8 @@ var
 begin
   if Edit1.Text <> '' then
   begin
-    sql := 'INSERT INTO list (name) VALUES ("' + Edit1.Text + '")';
-    //showmessage(sql);
-    FDConnection1.ExecSQL(sql);
+    FDQuery2.ParamByName('name').AsString := Edit1.Text;
+    FDQuery2.ExecSQL;
     StoreTabs := TStringList.Create;
     StoreTabs.Sorted := True;
     StoreTabs.Assign(TabControl1.Tabs);
@@ -76,9 +78,8 @@ var
 begin
   index := TabControl1.TabIndex;
   caption := TabControl1.Tabs[index];
-  sql := 'DELETE FROM list WHERE name = "' + caption + '"';
-  showmessage(sql);
-  FDConnection1.ExecSQL(sql);
+  FDQuery3.ParamByName('name').AsString := caption;
+  FDQuery3.ExecSQL;
   TabControl1.Tabs.Delete(TabControl1.TabIndex);
 end;
 
@@ -87,24 +88,11 @@ begin
   try
     if not FDConnection1.Connected then
       FDConnection1.Open;
-
-    sql := 'CREATE TABLE IF NOT EXISTS list (' +
-           'id INTEGER PRIMARY KEY AUTOINCREMENT, ' +
-           'name TEXT)';
-    FDConnection1.ExecSQL(sql);
-    sql := 'CREATE TABLE IF NOT EXISTS item (' +
-           'id INTEGER PRIMARY KEY AUTOINCREMENT, ' +
-           'name TEXT, ' +
-           'note TEXT, ' +
-           'category TEXT, ' +
-           'cost NUMBER, ' +
-           'quantity INTEGER, ' +
-           'list_id INTEGER, ' +
-           'assigned INTEGER)';
-    FDConnection1.ExecSQL(sql);
+    FDQuery4.ExecSQL;
+    FDQuery4.ExecSQL;
   except
-    // on E: Exception do
-      // Memo1.Lines.Add('Error creating tables: ' + E.Message);
+    on E: Exception do
+    ShowMessage('Error creating tables: ' + E.Message);
   end;
 end;
 
@@ -132,7 +120,7 @@ begin
       list_names.Free;
     end;
   end;
-  Form1.FDQuery1.Close;
+  FDQuery1.Close;
 end;
 
 procedure TForm1.FormShow(Sender: TObject);
