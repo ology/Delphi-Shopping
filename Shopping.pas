@@ -59,8 +59,13 @@ var
 begin
   if Edit1.Text <> '' then
   begin
-    FDQuery2.ParamByName('name').AsString := Edit1.Text;
-    FDQuery2.ExecSQL;
+    try
+      FDQuery2.ParamByName('name').AsString := Edit1.Text;
+      FDQuery2.ExecSQL;
+    except
+      on E: Exception do
+      ShowMessage('Error creating tables: ' + E.Message);
+    end;
     StoreTabs := TStringList.Create;
     StoreTabs.Sorted := True;
     StoreTabs.Assign(TabControl1.Tabs);
@@ -82,9 +87,20 @@ var
 begin
   index := TabControl1.TabIndex;
   caption := TabControl1.Tabs[index];
-  FDQuery3.ParamByName('name').AsString := caption;
-  FDQuery3.ExecSQL;
+  try
+    FDQuery3.ParamByName('name').AsString := caption;
+    FDQuery3.ExecSQL;
+  except
+    on E: Exception do
+    ShowMessage('Error deleting record: ' + E.Message);
+  end;
   TabControl1.Tabs.Delete(TabControl1.TabIndex);
+  TabControl1.TabIndex := 0;
+  Label1.Visible := True;
+  Edit1.Visible := True;
+  Button1.Visible := True;
+  Button2.Visible := False;
+  DBGrid1.Visible := False;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -126,7 +142,9 @@ begin
         FDQuery1.Next;
       end;
       TabControl1.Tabs := store_names;
-    finally
+    except
+      on E: Exception do
+      ShowMessage('Error showing record: ' + E.Message);
     end;
   end;
   FDQuery1.Close;
@@ -139,26 +157,32 @@ begin
   show_stores(Sender);
 end;
 
+procedure ShowFirstTab();
+begin
+  Form1.Label1.Visible := True;
+  Form1.Edit1.Visible := True;
+  Form1.Button1.Visible := True;
+  Form1.Button2.Visible := False;
+  Form1.DBGrid1.Visible := False;
+end;
+
+procedure ShowStoreTab();
+begin
+  Form1.Label1.Visible := False;
+  Form1.Edit1.Visible := False;
+  Form1.Button1.Visible := False;
+  Form1.Button2.Visible := True;
+  Form1.DBGrid1.Visible := True;
+  Form1.FDQuery6.Close;
+  Form1.FDQuery6.open;
+end;
+
 procedure TForm1.TabControl1Change(Sender: TObject);
 begin
   if TabControl1.TabIndex = 0 then
-  begin
-    Label1.Visible := True;
-    Edit1.Visible := True;
-    Button1.Visible := True;
-    Button2.Visible := False;
-    DBGrid1.Visible := False;
-  end
+    ShowFirstTab()
   else
-  begin
-    Label1.Visible := False;
-    Edit1.Visible := False;
-    Button1.Visible := False;
-    Button2.Visible := True;
-    DBGrid1.Visible := True;
-    FDQuery6.Close;
-    FDQuery6.open;
-  end;
+    ShowStoreTab();
 end;
 
 end.

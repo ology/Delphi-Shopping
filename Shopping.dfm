@@ -75,8 +75,8 @@ object Form1: TForm1
     Params.Strings = (
       'DriverID=SQLite'
       
-        'Database=C:\Users\diamo\Documents\Embarcadero\Studio\Projects\Sh' +
-        'opping\Shopping.db')
+        'Database=C:\cygwin64\home\diamo\repos\Delphi-Shopping\Shopping.d' +
+        'b')
     Left = 56
     Top = 352
   end
