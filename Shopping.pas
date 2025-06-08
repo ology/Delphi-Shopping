@@ -104,12 +104,10 @@ end;
 procedure TForm1.Button2Click(Sender: TObject);
 var
   index: integer;
-  caption: string;
 begin
   index := TabControl1.TabIndex;
-  caption := TabControl1.Tabs[index];
   try
-    FDQuery3.ParamByName('name').AsString := caption;
+    FDQuery3.ParamByName('name').AsString := TabControl1.Tabs[index];
     FDQuery3.ExecSQL;
   except
     on E: Exception do
