@@ -118,7 +118,6 @@ object Form1: TForm1
         Width = 165
         Height = 23
         TabOrder = 0
-        Text = 'Edit2'
       end
       object Edit3: TEdit
         Left = 96
@@ -126,7 +125,6 @@ object Form1: TForm1
         Width = 168
         Height = 23
         TabOrder = 1
-        Text = 'Edit3'
       end
       object Edit4: TEdit
         Left = 360
@@ -134,7 +132,6 @@ object Form1: TForm1
         Width = 57
         Height = 23
         TabOrder = 2
-        Text = 'Edit4'
       end
       object Edit5: TEdit
         Left = 360
@@ -142,24 +139,22 @@ object Form1: TForm1
         Width = 57
         Height = 23
         TabOrder = 3
-        Text = 'Edit5'
       end
       object Memo1: TMemo
         Left = 96
         Top = 104
         Width = 321
         Height = 38
-        Lines.Strings = (
-          'Memo1')
         TabOrder = 4
       end
       object Button3: TButton
         Left = 456
-        Top = 120
+        Top = 112
         Width = 75
         Height = 25
         Caption = 'Submit'
         TabOrder = 5
+        OnClick = Button3Click
       end
     end
   end
@@ -253,5 +248,49 @@ object Form1: TForm1
       'from items')
     Left = 528
     Top = 296
+  end
+  object FDQuery7: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'insert into items ('
+      'name,'
+      'category,'
+      'price,'
+      'quantity,'
+      'note)'
+      'values ('
+      ':name,'
+      ':cat,'
+      ':price,'
+      ':quant,'
+      ':note'
+      ')')
+    Left = 528
+    Top = 240
+    ParamData = <
+      item
+        Name = 'NAME'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'CAT'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'PRICE'
+        DataType = ftCurrency
+        ParamType = ptInput
+      end
+      item
+        Name = 'QUANT'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Name = 'NOTE'
+        ParamType = ptInput
+      end>
   end
 end

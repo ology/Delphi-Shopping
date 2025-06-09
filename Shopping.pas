@@ -42,6 +42,7 @@ type
     Label6: TLabel;
     Memo1: TMemo;
     Button3: TButton;
+    FDQuery7: TFDQuery;
     procedure ShowFirstTab();
     procedure ShowStoreTab(id: integer);
     procedure FormCreate(Sender: TObject);
@@ -52,6 +53,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
     sql: string;
@@ -134,6 +136,15 @@ begin
   TabControl1.Tabs.Delete(index);
   TabControl1.TabIndex := 0;
   ShowFirstTab();
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+    FDQuery7.ParamByName('name').AsString := Edit2.Text;
+    FDQuery7.ParamByName('cat').AsString := Edit3.Text;
+    FDQuery7.ParamByName('quant').AsString := Edit2.Text;
+    FDQuery7.ParamByName('price').AsString := Edit2.Text;
+    FDQuery7.ExecSQL;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
