@@ -142,8 +142,9 @@ procedure TForm1.Button3Click(Sender: TObject);
 begin
     FDQuery7.ParamByName('name').AsString := Edit2.Text;
     FDQuery7.ParamByName('cat').AsString := Edit3.Text;
-    FDQuery7.ParamByName('quant').AsString := Edit2.Text;
-    FDQuery7.ParamByName('price').AsString := Edit2.Text;
+    FDQuery7.ParamByName('price').AsFloat := StrToFloat(Edit5.Text);
+    FDQuery7.ParamByName('quant').AsInteger := StrToInt(Edit4.Text);
+    FDQuery7.ParamByName('note').AsString := Memo1.Lines.Text;
     FDQuery7.ExecSQL;
 end;
 

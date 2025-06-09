@@ -22,7 +22,6 @@ object Form1: TForm1
     Align = alClient
     TabOrder = 0
     OnChange = TabControl1Change
-    ExplicitHeight = 441
     object Label1: TLabel
       Left = 32
       Top = 48
