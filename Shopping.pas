@@ -11,7 +11,7 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.SQLiteWrapper.Stat, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.FormTabsBar, Vcl.ComCtrls, Vcl.Grids,
-  Vcl.DBGrids;
+  Vcl.DBGrids, Vcl.ExtCtrls;
 
 type
   TForm1 = class(TForm)
@@ -30,6 +30,20 @@ type
     Button2: TButton;
     DBGrid1: TDBGrid;
     FDQuery6: TFDQuery;
+    Panel1: TPanel;
+    Label2: TLabel;
+    Edit2: TEdit;
+    Label3: TLabel;
+    Edit3: TEdit;
+    Label4: TLabel;
+    Edit4: TEdit;
+    Label5: TLabel;
+    Edit5: TEdit;
+    Label6: TLabel;
+    Memo1: TMemo;
+    Button3: TButton;
+    procedure ShowFirstTab();
+    procedure ShowStoreTab(id: integer);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure TabControl1Change(Sender: TObject);
@@ -53,24 +67,26 @@ implementation
 
 {$R *.dfm}
 
-procedure ShowFirstTab();
+procedure TForm1.ShowFirstTab();
 begin
-  Form1.Label1.Visible := True;
-  Form1.Edit1.Visible := True;
-  Form1.Button1.Visible := True;
-  Form1.Button2.Visible := False;
-  Form1.DBGrid1.Visible := False;
+  Visible := True;
+  Edit1.Visible := True;
+  Button1.Visible := True;
+  Button2.Visible := False;
+  DBGrid1.Visible := False;
+  Panel1.Visible := False;
 end;
 
-procedure ShowStoreTab(id: integer);
+procedure TForm1.ShowStoreTab(id: integer);
 begin
-  Form1.Label1.Visible := False;
-  Form1.Edit1.Visible := False;
-  Form1.Button1.Visible := False;
-  Form1.Button2.Visible := True;
-  Form1.DBGrid1.Visible := True;
-  Form1.FDQuery6.Close;
-  Form1.FDQuery6.open;
+  Label1.Visible := False;
+  Edit1.Visible := False;
+  Button1.Visible := False;
+  Button2.Visible := True;
+  DBGrid1.Visible := True;
+  FDQuery6.Close;
+  FDQuery6.open;
+  Panel1.Visible := True;
 end;
 
 procedure TForm1.new_store(Sender: TObject);
@@ -134,6 +150,7 @@ begin
   store_names := TStringList.Create;
   store_names.Add('+');
   TabControl1.Tabs := store_names;
+  ShowFirstTab();
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
