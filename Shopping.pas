@@ -74,6 +74,7 @@ begin
   Visible := True;
   Label1.Visible := True;
   Edit1.Visible := True;
+  Edit1.SetFocus();
   Button1.Visible := True;
   Button2.Visible := False;
   DBGrid1.Visible := False;
