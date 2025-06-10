@@ -111,9 +111,9 @@ begin
     StoreTabs.Assign(TabControl1.Tabs);
     StoreTabs.Add(Edit1.Text);
     TabControl1.Tabs := StoreTabs;
+    TabControl1.TabIndex := TabControl1.Tabs.IndexOf(Edit1.Text);
     Edit1.Text := '';
-    TabControl1.TabIndex := TabControl1.Tabs.Count - 1;
-    ShowStoreTab(TabControl1.Tabs.Count - 1);
+    ShowStoreTab(TabControl1.TabIndex);
   end;
 end;
 
