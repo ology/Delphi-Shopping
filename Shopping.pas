@@ -101,7 +101,6 @@ begin
   begin
     try
       FDQuery2.ParamByName('name').AsString := Edit1.Text;
-      FDQuery2.ParamByName('tab').AsInteger := TabControl1.Tabs.Count;
       FDQuery2.ExecSQL;
     except
       on E: Exception do
@@ -142,12 +141,21 @@ end;
 
 procedure TForm1.Button3Click(Sender: TObject);
 begin
+  try
     FDQuery7.ParamByName('name').AsString := Edit2.Text;
     FDQuery7.ParamByName('cat').AsString := Edit3.Text;
     FDQuery7.ParamByName('price').AsFloat := StrToFloat(Edit5.Text);
     FDQuery7.ParamByName('quant').AsInteger := StrToInt(Edit4.Text);
     FDQuery7.ParamByName('note').AsString := Memo1.Lines.Text;
     FDQuery7.ExecSQL;
+    Edit2.Text := '';
+    Edit3.Text := '';
+    Edit4.Text := '';
+    Edit5.Text := '';
+  except
+    on E: Exception do
+    ShowMessage('Error inserting item: ' + E.Message);
+  end;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
