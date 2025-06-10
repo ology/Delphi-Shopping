@@ -152,6 +152,9 @@ begin
     Edit3.Text := '';
     Edit4.Text := '';
     Edit5.Text := '';
+    Memo1.Lines.Text := '';
+    FDQuery6.Close;
+    FDQuery6.Open;
   except
     on E: Exception do
     ShowMessage('Error inserting item: ' + E.Message);
