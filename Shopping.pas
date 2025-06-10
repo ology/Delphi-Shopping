@@ -72,6 +72,7 @@ implementation
 procedure TForm1.ShowFirstTab();
 begin
   Visible := True;
+  Label1.Visible := True;
   Edit1.Visible := True;
   Button1.Visible := True;
   Button2.Visible := False;
@@ -86,9 +87,9 @@ begin
   Button1.Visible := False;
   Button2.Visible := True;
   DBGrid1.Visible := True;
+  Panel1.Visible := True;
   FDQuery6.Close;
   FDQuery6.open;
-  Panel1.Visible := True;
 end;
 
 procedure TForm1.new_store(Sender: TObject);

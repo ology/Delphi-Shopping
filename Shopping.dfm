@@ -174,6 +174,7 @@ object Form1: TForm1
     Top = 352
   end
   object DataSource1: TDataSource
+    DataSet = FDQuery6
     Left = 144
     Top = 352
   end
@@ -214,7 +215,7 @@ object Form1: TForm1
     SQL.Strings = (
       'CREATE TABLE IF NOT EXISTS stores ('
       'id INTEGER PRIMARY KEY AUTOINCREMENT, '
-      'name TEXT,'
+      'name VARCHAR(20),'
       'tab INTEGER)')
     Left = 384
     Top = 296
@@ -224,9 +225,9 @@ object Form1: TForm1
     SQL.Strings = (
       'CREATE TABLE IF NOT EXISTS items ('
       'id INTEGER PRIMARY KEY AUTOINCREMENT,'
-      'name TEXT,'
-      'note TEXT,'
-      'category TEXT,'
+      'name VARCHAR(20),'
+      'note VARCHAR(255),'
+      'category VARCHAR(20),'
       'price NUMBER,'
       'quantity INTEGER,'
       'store_id INTEGER,'
@@ -289,6 +290,7 @@ object Form1: TForm1
       end
       item
         Name = 'NOTE'
+        DataType = ftString
         ParamType = ptInput
       end>
   end
