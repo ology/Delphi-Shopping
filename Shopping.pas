@@ -44,6 +44,7 @@ type
     Button3: TButton;
     FDQuery7: TFDQuery;
     FDQuery8: TFDQuery;
+    FDQuery9: TFDQuery;
     procedure ShowFirstTab();
     procedure ShowStoreTab(id: integer);
     procedure FormCreate(Sender: TObject);
@@ -143,6 +144,8 @@ end;
 
 // new item
 procedure TForm1.Button3Click(Sender: TObject);
+var
+  NewID: Variant;
 begin
   try
     FDQuery7.ParamByName('name').AsString := Edit2.Text;
@@ -151,12 +154,13 @@ begin
     FDQuery7.ParamByName('quant').AsInteger := StrToInt(Edit4.Text);
     FDQuery7.ParamByName('note').AsString := Memo1.Lines.Text;
     FDQuery7.ExecSQL;
-//    if TabControl1.TabIndex > 0 then
-//    begin
-//      FDQuery8.ParamByName('store_id').AsInteger := TabControl1.TabIndex;
-//      FDQuery8.ParamByName('item_id').AsInteger := TabControl1.TabIndex;
-//      FDQuery8.ExecSQL;
-//    end;
+    NewID := FDQuery7.Connection.GetLastAutoGenValue('items');
+    if TabControl1.TabIndex > 0 then
+    begin
+      FDQuery9.ParamByName('store').AsInteger := TabControl1.TabIndex;
+      FDQuery9.ParamByName('item').AsInteger := NewID;
+      FDQuery9.ExecSQL;
+    end;
     Edit2.Text := '';
     Edit3.Text := '';
     Edit4.Text := '';

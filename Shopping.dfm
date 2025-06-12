@@ -297,4 +297,22 @@ object Form1: TForm1
     Left = 312
     Top = 208
   end
+  object FDQuery9: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      
+        'INSERT INTO store_items (store_id, item_id) VALUES (:store, :ite' +
+        'm)')
+    Left = 240
+    Top = 208
+    ParamData = <
+      item
+        Name = 'STORE'
+        ParamType = ptInput
+      end
+      item
+        Name = 'ITEM'
+        ParamType = ptInput
+      end>
+  end
 end
