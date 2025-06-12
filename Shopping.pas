@@ -150,12 +150,13 @@ begin
     FDQuery7.ParamByName('price').AsFloat := StrToFloat(Edit5.Text);
     FDQuery7.ParamByName('quant').AsInteger := StrToInt(Edit4.Text);
     FDQuery7.ParamByName('note').AsString := Memo1.Lines.Text;
+    FDQuery7.ExecSQL;
 //    if TabControl1.TabIndex > 0 then
 //    begin
 //      FDQuery8.ParamByName('store_id').AsInteger := TabControl1.TabIndex;
 //      FDQuery8.ParamByName('item_id').AsInteger := TabControl1.TabIndex;
+//      FDQuery8.ExecSQL;
 //    end;
-    FDQuery7.ExecSQL;
     Edit2.Text := '';
     Edit3.Text := '';
     Edit4.Text := '';
