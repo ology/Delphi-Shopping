@@ -43,6 +43,7 @@ type
     Memo1: TMemo;
     Button3: TButton;
     FDQuery7: TFDQuery;
+    FDQuery8: TFDQuery;
     procedure ShowFirstTab();
     procedure ShowStoreTab(id: integer);
     procedure FormCreate(Sender: TObject);
@@ -78,7 +79,7 @@ begin
   Button1.Visible := True;
   Button2.Visible := False;
   DBGrid1.Visible := False;
-  Panel1.Visible := False;
+  Panel1.Visible := True;
 end;
 
 procedure TForm1.ShowStoreTab(id: integer);
@@ -168,6 +169,7 @@ begin
       FDConnection1.Open;
     FDQuery4.ExecSQL;
     FDQuery5.ExecSQL;
+    FDQuery8.ExecSQL;
   except
     on E: Exception do
     ShowMessage('Error creating tables: ' + E.Message);
