@@ -47,7 +47,6 @@ type
     procedure ShowFirstTab();
     procedure ShowStoreTab(id: integer);
     procedure FormCreate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure TabControl1Change(Sender: TObject);
     procedure show_stores(Sender: TObject);
     procedure new_store(Sender: TObject);
@@ -94,6 +93,7 @@ begin
   FDQuery6.open;
 end;
 
+// new store
 procedure TForm1.new_store(Sender: TObject);
 var
   StoreTabs: TStringList;
@@ -123,6 +123,7 @@ begin
   new_store(Sender);
 end;
 
+// delete store
 procedure TForm1.Button2Click(Sender: TObject);
 var
   index: integer;
@@ -140,6 +141,7 @@ begin
   ShowFirstTab();
 end;
 
+// new item
 procedure TForm1.Button3Click(Sender: TObject);
 begin
   try
@@ -148,6 +150,11 @@ begin
     FDQuery7.ParamByName('price').AsFloat := StrToFloat(Edit5.Text);
     FDQuery7.ParamByName('quant').AsInteger := StrToInt(Edit4.Text);
     FDQuery7.ParamByName('note').AsString := Memo1.Lines.Text;
+//    if TabControl1.TabIndex > 0 then
+//    begin
+//      FDQuery8.ParamByName('store_id').AsInteger := TabControl1.TabIndex;
+//      FDQuery8.ParamByName('item_id').AsInteger := TabControl1.TabIndex;
+//    end;
     FDQuery7.ExecSQL;
     Edit2.Text := '';
     Edit3.Text := '';
@@ -167,9 +174,9 @@ begin
   try
     if not FDConnection1.Connected then
       FDConnection1.Open;
-    FDQuery4.ExecSQL;
-    FDQuery5.ExecSQL;
-    FDQuery8.ExecSQL;
+    FDQuery4.ExecSQL; // stores
+    FDQuery5.ExecSQL; // items
+    FDQuery8.ExecSQL; // store_items
   except
     on E: Exception do
     ShowMessage('Error creating tables: ' + E.Message);
@@ -178,6 +185,7 @@ begin
   store_names.Add('+');
   TabControl1.Tabs := store_names;
   ShowFirstTab();
+  show_stores(Sender);
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -209,13 +217,6 @@ begin
     end;
   end;
   FDQuery1.Close;
-end;
-
-procedure TForm1.FormShow(Sender: TObject);
-var
-  i: integer;
-begin
-  show_stores(Sender);
 end;
 
 procedure TForm1.TabControl1Change(Sender: TObject);

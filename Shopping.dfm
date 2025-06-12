@@ -12,7 +12,6 @@ object Form1: TForm1
   Font.Style = []
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  OnShow = FormShow
   TextHeight = 15
   object TabControl1: TTabControl
     Left = 0
