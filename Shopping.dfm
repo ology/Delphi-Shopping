@@ -60,7 +60,7 @@ object Form1: TForm1
       Left = 32
       Top = 96
       Width = 555
-      Height = 313
+      Height = 338
       DataSource = DataSource1
       TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
@@ -72,83 +72,83 @@ object Form1: TForm1
     end
     object Panel1: TPanel
       Left = 32
-      Top = 424
+      Top = 440
       Width = 555
-      Height = 161
+      Height = 129
       TabOrder = 4
       object Label2: TLabel
         Left = 24
-        Top = 24
+        Top = 12
         Width = 54
         Height = 15
         Caption = 'New item:'
       end
       object Label3: TLabel
         Left = 24
-        Top = 64
+        Top = 45
         Width = 51
         Height = 15
         Caption = 'Category:'
       end
       object Label4: TLabel
         Left = 296
-        Top = 24
+        Top = 12
         Width = 49
         Height = 15
         Caption = 'Quantity:'
       end
       object Label5: TLabel
         Left = 296
-        Top = 64
+        Top = 45
         Width = 29
         Height = 15
         Caption = 'Price:'
       end
       object Label6: TLabel
         Left = 24
-        Top = 104
+        Top = 77
         Width = 29
         Height = 15
         Caption = 'Note:'
       end
       object Edit2: TEdit
         Left = 96
-        Top = 24
+        Top = 12
         Width = 165
         Height = 23
         TabOrder = 0
       end
       object Edit3: TEdit
         Left = 96
-        Top = 64
+        Top = 45
         Width = 168
         Height = 23
         TabOrder = 1
       end
       object Edit4: TEdit
         Left = 360
-        Top = 24
+        Top = 12
         Width = 57
         Height = 23
         TabOrder = 2
       end
       object Edit5: TEdit
         Left = 360
-        Top = 64
+        Top = 45
         Width = 57
         Height = 23
         TabOrder = 3
       end
       object Memo1: TMemo
         Left = 96
-        Top = 104
+        Top = 77
         Width = 321
         Height = 38
         TabOrder = 4
       end
       object Button3: TButton
         Left = 456
-        Top = 112
+        Top = 85
         Width = 75
         Height = 25
         Caption = 'Submit'
