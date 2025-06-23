@@ -163,30 +163,30 @@ object Form1: TForm1
         'Database=C:\cygwin64\home\diamo\repos\Delphi-Shopping\Shopping.d' +
         'b')
     Left = 176
-    Top = 136
+    Top = 120
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
       'SELECT id,name FROM stores ORDER BY LOWER(name)')
-    Left = 240
-    Top = 320
+    Left = 328
+    Top = 367
   end
   object DataSource1: TDataSource
     DataSet = FDQuery6
     Left = 264
-    Top = 136
+    Top = 120
   end
   object FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink
     Left = 384
-    Top = 136
+    Top = 120
   end
   object FDQuery2: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
       'INSERT INTO stores (name) VALUES (:name)')
-    Left = 312
-    Top = 320
+    Left = 456
+    Top = 367
     ParamData = <
       item
         Name = 'NAME'
@@ -197,8 +197,8 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'DELETE FROM stores WHERE name = :name')
-    Left = 384
-    Top = 320
+    Left = 528
+    Top = 367
     ParamData = <
       item
         Name = 'NAME'
@@ -211,8 +211,8 @@ object Form1: TForm1
       'CREATE TABLE IF NOT EXISTS stores ('
       'id INTEGER PRIMARY KEY AUTOINCREMENT, '
       'name VARCHAR(20))')
-    Left = 240
-    Top = 264
+    Left = 80
+    Top = 368
   end
   object FDQuery5: TFDQuery
     Connection = FDConnection1
@@ -226,8 +226,8 @@ object Form1: TForm1
       'quantity INTEGER,'
       'store_id INTEGER,'
       'assigned INTEGER)')
-    Left = 312
-    Top = 264
+    Left = 152
+    Top = 368
   end
   object FDQuery6: TFDQuery
     Connection = FDConnection1
@@ -240,8 +240,8 @@ object Form1: TForm1
       'quantity,'
       'note'
       'from items')
-    Left = 384
-    Top = 264
+    Left = 328
+    Top = 248
   end
   object FDQuery7: TFDQuery
     Connection = FDConnection1
@@ -259,8 +259,8 @@ object Form1: TForm1
       ':quant,'
       ':note'
       ')')
-    Left = 384
-    Top = 208
+    Left = 392
+    Top = 248
     ParamData = <
       item
         Name = 'NAME'
@@ -294,8 +294,8 @@ object Form1: TForm1
       'CREATE TABLE IF NOT EXISTS store_items ('
       'store_id INTEGER, '
       'item_id INTEGER)')
-    Left = 312
-    Top = 208
+    Left = 224
+    Top = 368
   end
   object FDQuery9: TFDQuery
     Connection = FDConnection1
@@ -303,8 +303,8 @@ object Form1: TForm1
       
         'INSERT INTO store_items (store_id, item_id) VALUES (:store, :ite' +
         'm)')
-    Left = 240
-    Top = 208
+    Left = 392
+    Top = 184
     ParamData = <
       item
         Name = 'STORE'
@@ -312,6 +312,46 @@ object Form1: TForm1
       end
       item
         Name = 'ITEM'
+        ParamType = ptInput
+      end>
+  end
+  object FDQuery10: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'DELETE FROM store_items WHERE store_id=:store OR item_id=:item')
+    Left = 456
+    Top = 184
+    ParamData = <
+      item
+        Name = 'STORE'
+        ParamType = ptInput
+      end
+      item
+        Name = 'ITEM'
+        ParamType = ptInput
+      end>
+  end
+  object FDQuery11: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'DELETE FROM items WHERE id = :id')
+    Left = 464
+    Top = 247
+    ParamData = <
+      item
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+  end
+  object FDQuery12: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'SELECT id FROM stores where name =  :name')
+    Left = 392
+    Top = 367
+    ParamData = <
+      item
+        Name = 'NAME'
         ParamType = ptInput
       end>
   end

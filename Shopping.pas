@@ -45,6 +45,9 @@ type
     FDQuery7: TFDQuery;
     FDQuery8: TFDQuery;
     FDQuery9: TFDQuery;
+    FDQuery10: TFDQuery;
+    FDQuery11: TFDQuery;
+    FDQuery12: TFDQuery;
     procedure ShowFirstTab();
     procedure ShowStoreTab(id: integer);
     procedure FormCreate(Sender: TObject);
@@ -91,7 +94,7 @@ begin
   DBGrid1.Visible := True;
   Panel1.Visible := True;
   FDQuery6.Close;
-  FDQuery6.open;
+  FDQuery6.Open;
 end;
 
 // new store
@@ -104,18 +107,18 @@ begin
     try
       FDQuery2.ParamByName('name').AsString := Edit1.Text;
       FDQuery2.ExecSQL;
+      StoreTabs := TStringList.Create;
+      StoreTabs.Sorted := True;
+      StoreTabs.Assign(TabControl1.Tabs);
+      StoreTabs.Add(Edit1.Text);
+      TabControl1.Tabs := StoreTabs;
+      TabControl1.TabIndex := TabControl1.Tabs.IndexOf(Edit1.Text);
+      Edit1.Text := '';
+      ShowStoreTab(TabControl1.TabIndex);
     except
       on E: Exception do
       ShowMessage('Error creating record: ' + E.Message);
     end;
-    StoreTabs := TStringList.Create;
-    StoreTabs.Sorted := True;
-    StoreTabs.Assign(TabControl1.Tabs);
-    StoreTabs.Add(Edit1.Text);
-    TabControl1.Tabs := StoreTabs;
-    TabControl1.TabIndex := TabControl1.Tabs.IndexOf(Edit1.Text);
-    Edit1.Text := '';
-    ShowStoreTab(TabControl1.TabIndex);
   end;
 end;
 
@@ -133,13 +136,18 @@ begin
   try
     FDQuery3.ParamByName('name').AsString := TabControl1.Tabs[index];
     FDQuery3.ExecSQL;
+    FDQuery12.ParamByName('name').AsString := TabControl1.Tabs[index];
+    FDQuery12.ExecSQL;
+    FDQuery10.ParamByName('store_id').AsInteger := FDQuery12.FieldByName('id').AsInteger;
+    FDQuery10.ParamByName('item_id').AsInteger := 0;
+    FDQuery10.ExecSQL;
+    TabControl1.Tabs.Delete(index);
+    TabControl1.TabIndex := 0;
+    ShowFirstTab();
   except
     on E: Exception do
     ShowMessage('Error deleting record: ' + E.Message);
   end;
-  TabControl1.Tabs.Delete(index);
-  TabControl1.TabIndex := 0;
-  ShowFirstTab();
 end;
 
 // new item
@@ -166,8 +174,8 @@ begin
     Edit4.Text := '';
     Edit5.Text := '';
     Memo1.Lines.Text := '';
-    FDQuery6.Close;
-    FDQuery6.Open;
+//    FDQuery6.Close;
+//    FDQuery6.Open;
   except
     on E: Exception do
     ShowMessage('Error inserting item: ' + E.Message);
@@ -182,15 +190,15 @@ begin
     FDQuery4.ExecSQL; // stores
     FDQuery5.ExecSQL; // items
     FDQuery8.ExecSQL; // store_items
+    store_names := TStringList.Create;
+    store_names.Add('+');
+    TabControl1.Tabs := store_names;
+    ShowFirstTab();
+    show_stores(Sender);
   except
     on E: Exception do
     ShowMessage('Error creating tables: ' + E.Message);
   end;
-  store_names := TStringList.Create;
-  store_names.Add('+');
-  TabControl1.Tabs := store_names;
-  ShowFirstTab();
-  show_stores(Sender);
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
