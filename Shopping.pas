@@ -48,6 +48,7 @@ type
     FDQuery10: TFDQuery;
     FDQuery11: TFDQuery;
     FDQuery12: TFDQuery;
+    FDQuery13: TFDQuery;
     procedure ShowFirstTab();
     procedure ShowStoreTab(name: string);
     procedure FormCreate(Sender: TObject);
@@ -75,27 +76,27 @@ implementation
 
 procedure TForm1.ShowFirstTab();
 begin
+  DBGrid1.DataSource.DataSet := FDQuery13;
+  FDQuery13.Close;
+  FDQuery13.Open;
   Visible := True;
   Label1.Visible := True;
   Edit1.Visible := True;
   Edit1.SetFocus();
   Button1.Visible := True;
   Button2.Visible := False;
-  DBGrid1.Visible := False;
-  Panel1.Visible := True;
 end;
 
 procedure TForm1.ShowStoreTab(name: string);
 begin
+  DBGrid1.DataSource.DataSet := FDQuery6;
+  FDQuery6.Close;
+  FDQuery6.ParamByName('store').AsString := name;
+  FDQuery6.Open;
   Label1.Visible := False;
   Edit1.Visible := False;
   Button1.Visible := False;
   Button2.Visible := True;
-  DBGrid1.Visible := True;
-  Panel1.Visible := True;
-  FDQuery6.Close;
-  FDQuery6.ParamByName('store').AsString := name;
-  FDQuery6.Open;
 end;
 
 // new store

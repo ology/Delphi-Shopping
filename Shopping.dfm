@@ -67,7 +67,6 @@ object Form1: TForm1
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
-      Visible = False
     end
     object Panel1: TPanel
       Left = 32
@@ -249,7 +248,7 @@ object Form1: TForm1
       '  on s.id = si.store_id'
       ''
       'where s.name = :store')
-    Left = 312
+    Left = 376
     Top = 296
     ParamData = <
       item
@@ -368,5 +367,19 @@ object Form1: TForm1
         Name = 'NAME'
         ParamType = ptInput
       end>
+  end
+  object FDQuery13: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select'
+      '  id,'
+      '  name,'
+      '  category,'
+      '  price,'
+      '  quantity,'
+      '  note'
+      'from items')
+    Left = 312
+    Top = 296
   end
 end
