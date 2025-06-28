@@ -169,7 +169,7 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'SELECT id,name FROM stores ORDER BY LOWER(name)')
-    Left = 328
+    Left = 312
     Top = 367
   end
   object DataSource1: TDataSource
@@ -185,7 +185,7 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'INSERT INTO stores (name) VALUES (:name)')
-    Left = 456
+    Left = 464
     Top = 367
     ParamData = <
       item
@@ -197,7 +197,7 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'DELETE FROM stores WHERE name = :name')
-    Left = 528
+    Left = 536
     Top = 367
     ParamData = <
       item
@@ -233,15 +233,29 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'select'
-      'id,'
-      'name,'
-      'category,'
-      'price,'
-      'quantity,'
-      'note'
-      'from items')
-    Left = 328
-    Top = 248
+      '  i.id,'
+      '  i.name,'
+      '  i.category,'
+      '  i.price,'
+      '  i.quantity,'
+      '  i.note'
+      ''
+      'from items as i'
+      ''
+      'join store_items as si'
+      '  on i.id = si.item_id'
+      ''
+      'join stores as s'
+      '  on s.id = si.store_id'
+      ''
+      'where s.name = :store')
+    Left = 312
+    Top = 296
+    ParamData = <
+      item
+        Name = 'STORE'
+        ParamType = ptInput
+      end>
   end
   object FDQuery7: TFDQuery
     Connection = FDConnection1
@@ -259,8 +273,8 @@ object Form1: TForm1
       ':quant,'
       ':note'
       ')')
-    Left = 392
-    Top = 248
+    Left = 464
+    Top = 296
     ParamData = <
       item
         Name = 'NAME'
@@ -303,8 +317,8 @@ object Form1: TForm1
       
         'INSERT INTO store_items (store_id, item_id) VALUES (:store, :ite' +
         'm)')
-    Left = 392
-    Top = 184
+    Left = 464
+    Top = 224
     ParamData = <
       item
         Name = 'STORE'
@@ -319,8 +333,8 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'DELETE FROM store_items WHERE store_id=:store OR item_id=:item')
-    Left = 456
-    Top = 184
+    Left = 536
+    Top = 224
     ParamData = <
       item
         Name = 'STORE'
@@ -335,8 +349,8 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'DELETE FROM items WHERE id = :id')
-    Left = 464
-    Top = 247
+    Left = 536
+    Top = 296
     ParamData = <
       item
         Name = 'ID'
@@ -347,7 +361,7 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'SELECT id FROM stores where name =  :name')
-    Left = 392
+    Left = 376
     Top = 367
     ParamData = <
       item

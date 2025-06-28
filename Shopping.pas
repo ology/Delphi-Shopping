@@ -49,7 +49,7 @@ type
     FDQuery11: TFDQuery;
     FDQuery12: TFDQuery;
     procedure ShowFirstTab();
-    procedure ShowStoreTab(id: integer);
+    procedure ShowStoreTab(name: string);
     procedure FormCreate(Sender: TObject);
     procedure TabControl1Change(Sender: TObject);
     procedure show_stores(Sender: TObject);
@@ -85,7 +85,7 @@ begin
   Panel1.Visible := True;
 end;
 
-procedure TForm1.ShowStoreTab(id: integer);
+procedure TForm1.ShowStoreTab(name: string);
 begin
   Label1.Visible := False;
   Edit1.Visible := False;
@@ -94,6 +94,7 @@ begin
   DBGrid1.Visible := True;
   Panel1.Visible := True;
   FDQuery6.Close;
+  FDQuery6.ParamByName('store').AsString := name;
   FDQuery6.Open;
 end;
 
@@ -114,7 +115,7 @@ begin
       TabControl1.Tabs := StoreTabs;
       TabControl1.TabIndex := TabControl1.Tabs.IndexOf(Edit1.Text);
       Edit1.Text := '';
-      ShowStoreTab(TabControl1.TabIndex);
+      ShowStoreTab(Edit1.Text);
     except
       on E: Exception do
       ShowMessage('Error creating record: ' + E.Message);
@@ -165,7 +166,10 @@ begin
     NewID := FDQuery7.Connection.GetLastAutoGenValue('items');
     if TabControl1.TabIndex > 0 then
     begin
-      FDQuery9.ParamByName('store').AsInteger := TabControl1.TabIndex;
+      FDQuery12.Close;
+      FDQuery12.ParamByName('name').AsString := TabControl1.Tabs[TabControl1.TabIndex];
+      FDQuery12.Open;
+      FDQuery9.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
       FDQuery9.ParamByName('item').AsInteger := NewID;
       FDQuery9.ExecSQL;
     end;
@@ -174,8 +178,9 @@ begin
     Edit4.Text := '';
     Edit5.Text := '';
     Memo1.Lines.Text := '';
-//    FDQuery6.Close;
-//    FDQuery6.Open;
+    FDQuery6.Close;
+    FDQuery6.ParamByName('store').AsString := TabControl1.Tabs[TabControl1.TabIndex];
+    FDQuery6.Open;
   except
     on E: Exception do
     ShowMessage('Error inserting item: ' + E.Message);
@@ -237,7 +242,7 @@ begin
   if TabControl1.TabIndex = 0 then
     ShowFirstTab()
   else
-    ShowStoreTab(TabControl1.TabIndex);
+    ShowStoreTab(TabControl1.Tabs[TabControl1.TabIndex]);
 end;
 
 end.
