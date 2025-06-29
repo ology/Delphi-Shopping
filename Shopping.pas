@@ -11,7 +11,7 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.SQLiteWrapper.Stat, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.FormTabsBar, Vcl.ComCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.ExtCtrls;
+  Vcl.DBGrids, Vcl.ExtCtrls, Vcl.Menus;
 
 type
   TForm1 = class(TForm)
@@ -49,6 +49,10 @@ type
     FDQuery11: TFDQuery;
     FDQuery12: TFDQuery;
     FDQuery13: TFDQuery;
+    Label7: TLabel;
+    Button4: TButton;
+    Label8: TLabel;
+    ComboBox1: TComboBox;
     procedure ShowFirstTab();
     procedure ShowStoreTab(name: string);
     procedure FormCreate(Sender: TObject);
@@ -61,7 +65,6 @@ type
     procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
-    sql: string;
     store_names: TStringList;
   public
     { Public declarations }
@@ -214,20 +217,16 @@ begin
 end;
 
 procedure TForm1.show_stores(Sender: TObject);
-var
-  i: integer;
 begin
   FDQuery1.Close;
   FDQuery1.Open;
   if FDQuery1.RecordCount > 0 then
   begin
     try
-      i := 0;
       FDQuery1.First;
       while not FDQuery1.Eof do
       begin
         store_names.Add(FDQuery1.FieldByName('name').AsString);
-        Inc(i);
         FDQuery1.Next;
       end;
       TabControl1.Tabs := store_names;

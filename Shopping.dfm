@@ -23,14 +23,21 @@ object Form1: TForm1
     OnChange = TabControl1Change
     object Label1: TLabel
       Left = 32
-      Top = 24
+      Top = 40
       Width = 56
       Height = 15
       Caption = 'New store:'
     end
+    object Label7: TLabel
+      Left = 32
+      Top = 64
+      Width = 32
+      Height = 15
+      Caption = 'Items:'
+    end
     object Edit1: TEdit
       Left = 94
-      Top = 21
+      Top = 37
       Width = 121
       Height = 23
       TabOrder = 0
@@ -38,7 +45,7 @@ object Form1: TForm1
     end
     object Button1: TButton
       Left = 221
-      Top = 20
+      Top = 36
       Width = 75
       Height = 25
       Caption = 'Submit'
@@ -47,7 +54,7 @@ object Form1: TForm1
     end
     object Button2: TButton
       Left = 488
-      Top = 20
+      Top = 36
       Width = 99
       Height = 25
       Caption = 'Remove store'
@@ -57,9 +64,9 @@ object Form1: TForm1
     end
     object DBGrid1: TDBGrid
       Left = 32
-      Top = 64
+      Top = 88
       Width = 555
-      Height = 377
+      Height = 321
       DataSource = DataSource1
       TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
@@ -70,88 +77,114 @@ object Form1: TForm1
     end
     object Panel1: TPanel
       Left = 32
-      Top = 456
+      Top = 415
       Width = 555
-      Height = 129
+      Height = 162
       TabOrder = 4
       object Label2: TLabel
         Left = 24
-        Top = 12
+        Top = 44
         Width = 54
         Height = 15
         Caption = 'New item:'
       end
       object Label3: TLabel
         Left = 24
-        Top = 45
+        Top = 77
         Width = 51
         Height = 15
         Caption = 'Category:'
       end
       object Label4: TLabel
-        Left = 296
-        Top = 12
+        Left = 312
+        Top = 44
         Width = 49
         Height = 15
         Caption = 'Quantity:'
       end
       object Label5: TLabel
-        Left = 296
-        Top = 45
+        Left = 312
+        Top = 77
         Width = 29
         Height = 15
         Caption = 'Price:'
       end
       object Label6: TLabel
         Left = 24
-        Top = 77
+        Top = 109
         Width = 29
         Height = 15
         Caption = 'Note:'
       end
+      object Label8: TLabel
+        Left = 24
+        Top = 16
+        Width = 47
+        Height = 15
+        Caption = 'Selected:'
+      end
       object Edit2: TEdit
         Left = 96
-        Top = 12
+        Top = 44
         Width = 165
         Height = 23
         TabOrder = 0
       end
       object Edit3: TEdit
         Left = 96
-        Top = 45
+        Top = 77
         Width = 168
         Height = 23
         TabOrder = 1
       end
       object Edit4: TEdit
-        Left = 360
-        Top = 12
+        Left = 376
+        Top = 44
         Width = 57
         Height = 23
         TabOrder = 2
       end
       object Edit5: TEdit
-        Left = 360
-        Top = 45
+        Left = 376
+        Top = 77
         Width = 57
         Height = 23
         TabOrder = 3
       end
       object Memo1: TMemo
         Left = 96
-        Top = 77
-        Width = 321
+        Top = 106
+        Width = 337
         Height = 38
         TabOrder = 4
       end
       object Button3: TButton
         Left = 456
-        Top = 85
+        Top = 117
         Width = 75
         Height = 25
         Caption = 'Submit'
         TabOrder = 5
         OnClick = Button3Click
+      end
+      object Button4: TButton
+        Left = 96
+        Top = 9
+        Width = 105
+        Height = 25
+        Caption = 'Remove item'
+        TabOrder = 6
+      end
+      object ComboBox1: TComboBox
+        Left = 288
+        Top = 9
+        Width = 145
+        Height = 23
+        ItemIndex = 0
+        TabOrder = 7
+        Text = 'To store'
+        Items.Strings = (
+          'To store')
       end
     end
   end
@@ -161,31 +194,31 @@ object Form1: TForm1
       
         'Database=C:\cygwin64\home\diamo\repos\Delphi-Shopping\Shopping.d' +
         'b')
-    Left = 176
-    Top = 120
+    Left = 88
+    Top = 176
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
       'SELECT name FROM stores ORDER BY LOWER(name)')
-    Left = 312
-    Top = 367
+    Left = 304
+    Top = 319
   end
   object DataSource1: TDataSource
     DataSet = FDQuery6
-    Left = 264
-    Top = 120
+    Left = 176
+    Top = 176
   end
   object FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink
-    Left = 384
-    Top = 120
+    Left = 296
+    Top = 176
   end
   object FDQuery2: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
       'INSERT INTO stores (name) VALUES (:name)')
-    Left = 464
-    Top = 367
+    Left = 456
+    Top = 319
     ParamData = <
       item
         Name = 'NAME'
@@ -196,8 +229,8 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'DELETE FROM stores WHERE name = :name')
-    Left = 536
-    Top = 367
+    Left = 528
+    Top = 319
     ParamData = <
       item
         Name = 'NAME'
@@ -210,8 +243,8 @@ object Form1: TForm1
       'CREATE TABLE IF NOT EXISTS stores ('
       'id INTEGER PRIMARY KEY AUTOINCREMENT, '
       'name VARCHAR(20))')
-    Left = 80
-    Top = 368
+    Left = 72
+    Top = 320
   end
   object FDQuery5: TFDQuery
     Connection = FDConnection1
@@ -225,8 +258,8 @@ object Form1: TForm1
       'quantity INTEGER,'
       'store_id INTEGER,'
       'assigned INTEGER)')
-    Left = 152
-    Top = 368
+    Left = 144
+    Top = 320
   end
   object FDQuery6: TFDQuery
     Connection = FDConnection1
@@ -247,8 +280,8 @@ object Form1: TForm1
       '  on s.id = si.store_id'
       ''
       'where s.name = :store')
-    Left = 376
-    Top = 296
+    Left = 368
+    Top = 248
     ParamData = <
       item
         Name = 'STORE'
@@ -271,8 +304,8 @@ object Form1: TForm1
       ':quant,'
       ':note'
       ')')
-    Left = 464
-    Top = 296
+    Left = 456
+    Top = 248
     ParamData = <
       item
         Name = 'NAME'
@@ -306,8 +339,8 @@ object Form1: TForm1
       'CREATE TABLE IF NOT EXISTS store_items ('
       'store_id INTEGER, '
       'item_id INTEGER)')
-    Left = 224
-    Top = 368
+    Left = 216
+    Top = 320
   end
   object FDQuery9: TFDQuery
     Connection = FDConnection1
@@ -315,8 +348,8 @@ object Form1: TForm1
       
         'INSERT INTO store_items (store_id, item_id) VALUES (:store, :ite' +
         'm)')
-    Left = 464
-    Top = 224
+    Left = 456
+    Top = 176
     ParamData = <
       item
         Name = 'STORE'
@@ -331,8 +364,8 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'DELETE FROM store_items WHERE store_id=:store OR item_id=:item')
-    Left = 536
-    Top = 224
+    Left = 528
+    Top = 176
     ParamData = <
       item
         Name = 'STORE'
@@ -347,8 +380,8 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'DELETE FROM items WHERE id = :id')
-    Left = 536
-    Top = 296
+    Left = 528
+    Top = 248
     ParamData = <
       item
         Name = 'ID'
@@ -359,8 +392,8 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'SELECT id FROM stores where name =  :name')
-    Left = 376
-    Top = 367
+    Left = 368
+    Top = 319
     ParamData = <
       item
         Name = 'NAME'
@@ -377,7 +410,7 @@ object Form1: TForm1
       '  quantity,'
       '  note'
       'from items')
-    Left = 312
-    Top = 296
+    Left = 304
+    Top = 248
   end
 end
