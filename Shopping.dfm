@@ -167,7 +167,7 @@ object Form1: TForm1
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'SELECT id,name FROM stores ORDER BY LOWER(name)')
+      'SELECT name FROM stores ORDER BY LOWER(name)')
     Left = 312
     Top = 367
   end
@@ -232,7 +232,6 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'select'
-      '  i.id,'
       '  i.name,'
       '  i.category,'
       '  i.price,'
@@ -372,7 +371,6 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'select'
-      '  id,'
       '  name,'
       '  category,'
       '  price,'

@@ -117,6 +117,7 @@ begin
       TabControl1.TabIndex := TabControl1.Tabs.IndexOf(Edit1.Text);
       Edit1.Text := '';
       ShowStoreTab(Edit1.Text);
+      StoreTabs.Free;
     except
       on E: Exception do
       ShowMessage('Error creating record: ' + E.Message);
