@@ -23,14 +23,14 @@ object Form1: TForm1
     OnChange = TabControl1Change
     object Label1: TLabel
       Left = 32
-      Top = 48
+      Top = 24
       Width = 56
       Height = 15
       Caption = 'New store:'
     end
     object Edit1: TEdit
       Left = 94
-      Top = 45
+      Top = 21
       Width = 121
       Height = 23
       TabOrder = 0
@@ -38,7 +38,7 @@ object Form1: TForm1
     end
     object Button1: TButton
       Left = 221
-      Top = 44
+      Top = 20
       Width = 75
       Height = 25
       Caption = 'Submit'
@@ -47,7 +47,7 @@ object Form1: TForm1
     end
     object Button2: TButton
       Left = 488
-      Top = 44
+      Top = 20
       Width = 99
       Height = 25
       Caption = 'Remove store'
@@ -57,9 +57,9 @@ object Form1: TForm1
     end
     object DBGrid1: TDBGrid
       Left = 32
-      Top = 88
+      Top = 64
       Width = 555
-      Height = 346
+      Height = 377
       DataSource = DataSource1
       TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
@@ -70,7 +70,7 @@ object Form1: TForm1
     end
     object Panel1: TPanel
       Left = 32
-      Top = 440
+      Top = 456
       Width = 555
       Height = 129
       TabOrder = 4
