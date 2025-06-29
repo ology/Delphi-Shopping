@@ -176,9 +176,9 @@ object Form1: TForm1
         TabOrder = 6
       end
       object ComboBox1: TComboBox
-        Left = 288
+        Left = 312
         Top = 9
-        Width = 145
+        Width = 121
         Height = 23
         ItemIndex = 0
         TabOrder = 7
