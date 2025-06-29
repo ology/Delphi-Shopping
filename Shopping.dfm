@@ -57,9 +57,9 @@ object Form1: TForm1
     end
     object DBGrid1: TDBGrid
       Left = 32
-      Top = 96
+      Top = 88
       Width = 555
-      Height = 338
+      Height = 346
       DataSource = DataSource1
       TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
