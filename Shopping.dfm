@@ -266,6 +266,7 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'select'
+      '  i.id,'
       '  i.name,'
       '  i.category,'
       '  i.price,'
@@ -405,6 +406,7 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'select'
+      '  id,'
       '  name,'
       '  category,'
       '  price,'
