@@ -50,9 +50,9 @@ type
     FDQuery12: TFDQuery;
     FDQuery13: TFDQuery;
     Label7: TLabel;
-    Button4: TButton;
     Label8: TLabel;
     ComboBox1: TComboBox;
+    Button4: TButton;
     procedure ShowFirstTab();
     procedure ShowStoreTab(name: string);
     procedure FormCreate(Sender: TObject);
@@ -63,6 +63,9 @@ type
     procedure Button2Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    function CurrentRowNumber(): integer;
+    function GetFieldValue(colnum : integer): string;
   private
     { Private declarations }
     store_names: TStringList;
@@ -73,9 +76,22 @@ type
 var
   Form1: TForm1;
 
+type
+  THackDBGrid = class(TDBGrid);
+
 implementation
 
 {$R *.dfm}
+
+function TForm1.CurrentRowNumber: integer;
+begin
+  Result := THackDBGrid(DBGrid1).Row;
+end;
+
+function TForm1.GetFieldValue(colnum : integer): string;
+begin
+  Result := THackDBGrid(DBGrid1).GetFieldValue(colnum);
+end;
 
 procedure TForm1.ShowFirstTab();
 begin
@@ -190,6 +206,13 @@ begin
     on E: Exception do
     ShowMessage('Error inserting item: ' + E.Message);
   end;
+end;
+
+// remove item
+procedure TForm1.Button4Click(Sender: TObject);
+begin
+//  ShowMessage(inttostr(CurrentRowNumber()));
+  ShowMessage(GetFieldValue(1));
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);

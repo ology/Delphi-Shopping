@@ -35,6 +35,13 @@ object Form1: TForm1
       Height = 15
       Caption = 'Items:'
     end
+    object Label8: TLabel
+      Left = 45
+      Top = 424
+      Width = 74
+      Height = 15
+      Caption = 'Selected item:'
+    end
     object Edit1: TEdit
       Left = 94
       Top = 37
@@ -64,9 +71,9 @@ object Form1: TForm1
     end
     object DBGrid1: TDBGrid
       Left = 32
-      Top = 88
+      Top = 85
       Width = 555
-      Height = 321
+      Height = 316
       DataSource = DataSource1
       TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
@@ -77,115 +84,109 @@ object Form1: TForm1
     end
     object Panel1: TPanel
       Left = 32
-      Top = 415
+      Top = 456
       Width = 555
-      Height = 162
+      Height = 121
       TabOrder = 4
       object Label2: TLabel
         Left = 24
-        Top = 44
+        Top = 12
         Width = 54
         Height = 15
         Caption = 'New item:'
       end
       object Label3: TLabel
         Left = 24
-        Top = 77
+        Top = 45
         Width = 51
         Height = 15
         Caption = 'Category:'
       end
       object Label4: TLabel
         Left = 312
-        Top = 44
+        Top = 12
         Width = 49
         Height = 15
         Caption = 'Quantity:'
       end
       object Label5: TLabel
         Left = 312
-        Top = 77
+        Top = 45
         Width = 29
         Height = 15
         Caption = 'Price:'
       end
       object Label6: TLabel
         Left = 24
-        Top = 109
+        Top = 77
         Width = 29
         Height = 15
         Caption = 'Note:'
       end
-      object Label8: TLabel
-        Left = 24
-        Top = 16
-        Width = 47
-        Height = 15
-        Caption = 'Selected:'
-      end
       object Edit2: TEdit
         Left = 96
-        Top = 44
-        Width = 165
+        Top = 12
+        Width = 168
         Height = 23
         TabOrder = 0
       end
       object Edit3: TEdit
         Left = 96
-        Top = 77
+        Top = 45
         Width = 168
         Height = 23
         TabOrder = 1
       end
       object Edit4: TEdit
         Left = 376
-        Top = 44
+        Top = 12
         Width = 57
         Height = 23
         TabOrder = 2
       end
       object Edit5: TEdit
         Left = 376
-        Top = 77
+        Top = 45
         Width = 57
         Height = 23
         TabOrder = 3
       end
       object Memo1: TMemo
         Left = 96
-        Top = 106
+        Top = 74
         Width = 337
         Height = 38
         TabOrder = 4
       end
       object Button3: TButton
         Left = 456
-        Top = 117
+        Top = 85
         Width = 75
         Height = 25
         Caption = 'Submit'
         TabOrder = 5
         OnClick = Button3Click
       end
-      object Button4: TButton
-        Left = 96
-        Top = 9
-        Width = 105
-        Height = 25
-        Caption = 'Remove item'
-        TabOrder = 6
-      end
-      object ComboBox1: TComboBox
-        Left = 312
-        Top = 9
-        Width = 121
-        Height = 23
-        ItemIndex = 0
-        TabOrder = 7
-        Text = 'To store'
-        Items.Strings = (
-          'To store')
-      end
+    end
+    object ComboBox1: TComboBox
+      Left = 128
+      Top = 422
+      Width = 168
+      Height = 23
+      ItemIndex = 0
+      TabOrder = 5
+      Text = 'To store'
+      Items.Strings = (
+        'To store')
+    end
+    object Button4: TButton
+      Left = 488
+      Top = 417
+      Width = 75
+      Height = 25
+      Caption = 'Remove'
+      TabOrder = 6
+      OnClick = Button4Click
     end
   end
   object FDConnection1: TFDConnection
