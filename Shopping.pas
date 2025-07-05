@@ -240,7 +240,7 @@ begin
       FDQuery6.Open;
     end;
     except
-      ShowMessage('Cannot delete item');
+      ShowMessage('Cannot remove item');
     end;
   end;
 end;
