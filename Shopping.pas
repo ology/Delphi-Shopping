@@ -274,22 +274,20 @@ begin
   FDQuery1.Close;
   FDQuery1.Open;
   if FDQuery1.RecordCount > 0 then
-  begin
-    try
-      FDQuery1.First;
-      while not FDQuery1.Eof do
-      begin
-        ComboBox1.Items.Add(FDQuery1.FieldByName('name').AsString);
-        store_names.Add(FDQuery1.FieldByName('name').AsString);
-        FDQuery1.Next;
-      end;
-      TabControl1.Tabs := store_names;
-    except
-      on E: Exception do
-      ShowMessage('Error showing record: ' + E.Message);
+  try
+    FDQuery1.First;
+    while not FDQuery1.Eof do
+    begin
+      ComboBox1.Items.Add(FDQuery1.FieldByName('name').AsString);
+      store_names.Add(FDQuery1.FieldByName('name').AsString);
+      FDQuery1.Next;
     end;
+    TabControl1.Tabs := store_names;
+    FDQuery1.Close;
+  except
+    on E: Exception do
+    ShowMessage('Error showing record: ' + E.Message);
   end;
-  FDQuery1.Close;
 end;
 
 procedure TForm1.TabControl1Change(Sender: TObject);
