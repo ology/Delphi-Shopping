@@ -125,23 +125,21 @@ var
   StoreTabs: TStringList;
 begin
   if Edit1.Text <> '' then
-  begin
-    try
-      FDQuery2.ParamByName('name').AsString := Edit1.Text;
-      FDQuery2.ExecSQL;
-      StoreTabs := TStringList.Create;
-      StoreTabs.Sorted := True;
-      StoreTabs.Assign(TabControl1.Tabs);
-      StoreTabs.Add(Edit1.Text);
-      TabControl1.Tabs := StoreTabs;
-      TabControl1.TabIndex := TabControl1.Tabs.IndexOf(Edit1.Text);
-      Edit1.Text := '';
-      ShowStoreTab(Edit1.Text);
-      StoreTabs.Free;
-    except
-      on E: Exception do
-      ShowMessage('Error creating record: ' + E.Message);
-    end;
+  try
+    FDQuery2.ParamByName('name').AsString := Edit1.Text;
+    FDQuery2.ExecSQL;
+    StoreTabs := TStringList.Create;
+    StoreTabs.Sorted := True;
+    StoreTabs.Assign(TabControl1.Tabs);
+    StoreTabs.Add(Edit1.Text);
+    TabControl1.Tabs := StoreTabs;
+    TabControl1.TabIndex := TabControl1.Tabs.IndexOf(Edit1.Text);
+    Edit1.Text := '';
+    ShowStoreTab(Edit1.Text);
+    StoreTabs.Free;
+  except
+    on E: Exception do
+    ShowMessage('Error creating record: ' + E.Message);
   end;
 end;
 
