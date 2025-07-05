@@ -160,10 +160,10 @@ object Form1: TForm1
       end
       object Button3: TButton
         Left = 456
-        Top = 13
+        Top = 77
         Width = 75
         Height = 25
-        Caption = 'Submit'
+        Caption = 'New'
         TabOrder = 5
         OnClick = Button3Click
       end
@@ -186,6 +186,14 @@ object Form1: TForm1
         Caption = 'Remove'
         TabOrder = 7
         OnClick = Button4Click
+      end
+      object Button5: TButton
+        Left = 456
+        Top = 12
+        Width = 75
+        Height = 25
+        Caption = 'Search'
+        TabOrder = 8
       end
     end
   end

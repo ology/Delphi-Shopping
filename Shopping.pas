@@ -53,6 +53,7 @@ type
     Label8: TLabel;
     ComboBox1: TComboBox;
     Button4: TButton;
+    Button5: TButton;
     procedure ShowFirstTab();
     procedure ShowStoreTab(name: string);
     procedure FormCreate(Sender: TObject);
@@ -278,6 +279,7 @@ begin
       FDQuery1.First;
       while not FDQuery1.Eof do
       begin
+        ComboBox1.Items.Add(FDQuery1.FieldByName('name').AsString);
         store_names.Add(FDQuery1.FieldByName('name').AsString);
         FDQuery1.Next;
       end;
