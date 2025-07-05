@@ -155,6 +155,7 @@ var
   index: integer;
 begin
   index := TabControl1.TabIndex;
+  if MessageDlg('Delete store ' + TabControl1.Tabs[index] + '?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
   try
     FDQuery3.ParamByName('name').AsString := TabControl1.Tabs[index];
     FDQuery3.ExecSQL;
@@ -212,22 +213,27 @@ end;
 procedure TForm1.Button4Click(Sender: TObject);
 begin
 //  ShowMessage(inttostr(CurrentRowNumber()));
-  ShowMessage(GetFieldValue(0));
   if TabControl1.TabIndex = 0 then
   begin
-    FDQuery11.ParamByName('id').AsInteger := StrToInt(GetFieldValue(0));
-    FDQuery11.ExecSQL;
-    FDQuery13.Close;
-    FDQuery13.Open;
+    if MessageDlg('Delete item id ' + GetFieldValue(0) + '?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+      FDQuery11.ParamByName('id').AsInteger := StrToInt(GetFieldValue(0));
+      FDQuery11.ExecSQL;
+      FDQuery13.Close;
+      FDQuery13.Open;
+    end
   end
   else
   begin
-    FDQuery10.ParamByName('store').AsInteger := 0;
-    FDQuery10.ParamByName('item').AsInteger := StrToInt(GetFieldValue(0));
-    FDQuery10.ExecSQL;
-    FDQuery6.Close;
-    FDQuery6.ParamByName('store').AsString := TabControl1.Tabs[TabControl1.TabIndex];
-    FDQuery6.Open;
+    if MessageDlg('Remove item id ' + GetFieldValue(0) + ' from store?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+      FDQuery10.ParamByName('store').AsInteger := 0;
+      FDQuery10.ParamByName('item').AsInteger := StrToInt(GetFieldValue(0));
+      FDQuery10.ExecSQL;
+      FDQuery6.Close;
+      FDQuery6.ParamByName('store').AsString := TabControl1.Tabs[TabControl1.TabIndex];
+      FDQuery6.Open;
+    end
   end;
 end;
 
