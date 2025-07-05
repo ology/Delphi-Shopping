@@ -51,9 +51,9 @@ type
     FDQuery13: TFDQuery;
     Label7: TLabel;
     Label8: TLabel;
-    ComboBox1: TComboBox;
     Button4: TButton;
     Button5: TButton;
+    ComboBox1: TComboBox;
     procedure ShowFirstTab();
     procedure ShowStoreTab(name: string);
     procedure FormCreate(Sender: TObject);
@@ -275,6 +275,7 @@ begin
   FDQuery1.Open;
   if FDQuery1.RecordCount > 0 then
   begin
+    ComboBox1.Items.Clear;
     try
       FDQuery1.First;
       while not FDQuery1.Eof do

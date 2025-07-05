@@ -119,9 +119,9 @@ object Form1: TForm1
       object Label8: TLabel
         Left = 24
         Top = 122
-        Width = 47
+        Width = 44
         Height = 15
-        Caption = 'Selected:'
+        Caption = 'To store:'
       end
       object Edit2: TEdit
         Left = 96
@@ -167,24 +167,13 @@ object Form1: TForm1
         TabOrder = 5
         OnClick = Button3Click
       end
-      object ComboBox1: TComboBox
-        Left = 96
-        Top = 122
-        Width = 168
-        Height = 23
-        ItemIndex = 0
-        TabOrder = 6
-        Text = 'To store'
-        Items.Strings = (
-          'To store')
-      end
       object Button4: TButton
         Left = 456
         Top = 120
         Width = 75
         Height = 25
         Caption = 'Remove'
-        TabOrder = 7
+        TabOrder = 6
         OnClick = Button4Click
       end
       object Button5: TButton
@@ -193,7 +182,15 @@ object Form1: TForm1
         Width = 75
         Height = 25
         Caption = 'Search'
+        TabOrder = 7
+      end
+      object ComboBox1: TComboBox
+        Left = 96
+        Top = 122
+        Width = 145
+        Height = 23
         TabOrder = 8
+        Text = 'Select...'
       end
     end
   end
