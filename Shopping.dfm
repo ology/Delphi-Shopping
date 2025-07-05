@@ -35,13 +35,6 @@ object Form1: TForm1
       Height = 15
       Caption = 'Items:'
     end
-    object Label8: TLabel
-      Left = 45
-      Top = 424
-      Width = 74
-      Height = 15
-      Caption = 'Selected item:'
-    end
     object Edit1: TEdit
       Left = 94
       Top = 37
@@ -84,16 +77,16 @@ object Form1: TForm1
     end
     object Panel1: TPanel
       Left = 32
-      Top = 456
+      Top = 421
       Width = 555
-      Height = 121
+      Height = 161
       TabOrder = 4
       object Label2: TLabel
         Left = 24
         Top = 12
-        Width = 54
+        Width = 27
         Height = 15
-        Caption = 'New item:'
+        Caption = 'Item:'
       end
       object Label3: TLabel
         Left = 24
@@ -122,6 +115,13 @@ object Form1: TForm1
         Width = 29
         Height = 15
         Caption = 'Note:'
+      end
+      object Label8: TLabel
+        Left = 24
+        Top = 122
+        Width = 47
+        Height = 15
+        Caption = 'Selected:'
       end
       object Edit2: TEdit
         Left = 96
@@ -153,40 +153,40 @@ object Form1: TForm1
       end
       object Memo1: TMemo
         Left = 96
-        Top = 74
+        Top = 78
         Width = 337
         Height = 38
         TabOrder = 4
       end
       object Button3: TButton
         Left = 456
-        Top = 85
+        Top = 13
         Width = 75
         Height = 25
         Caption = 'Submit'
         TabOrder = 5
         OnClick = Button3Click
       end
-    end
-    object ComboBox1: TComboBox
-      Left = 128
-      Top = 422
-      Width = 168
-      Height = 23
-      ItemIndex = 0
-      TabOrder = 5
-      Text = 'To store'
-      Items.Strings = (
-        'To store')
-    end
-    object Button4: TButton
-      Left = 488
-      Top = 417
-      Width = 75
-      Height = 25
-      Caption = 'Remove'
-      TabOrder = 6
-      OnClick = Button4Click
+      object ComboBox1: TComboBox
+        Left = 96
+        Top = 122
+        Width = 168
+        Height = 23
+        ItemIndex = 0
+        TabOrder = 6
+        Text = 'To store'
+        Items.Strings = (
+          'To store')
+      end
+      object Button4: TButton
+        Left = 456
+        Top = 120
+        Width = 75
+        Height = 25
+        Caption = 'Remove'
+        TabOrder = 7
+        OnClick = Button4Click
+      end
     end
   end
   object FDConnection1: TFDConnection
