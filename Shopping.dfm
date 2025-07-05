@@ -163,7 +163,7 @@ object Form1: TForm1
         Top = 77
         Width = 75
         Height = 25
-        Caption = 'New'
+        Caption = 'Submit'
         TabOrder = 5
         OnClick = Button3Click
       end
@@ -200,30 +200,30 @@ object Form1: TForm1
       
         'Database=C:\cygwin64\home\diamo\repos\Delphi-Shopping\Shopping.d' +
         'b')
-    Left = 88
-    Top = 176
+    Left = 168
+    Top = 96
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
       'SELECT name FROM stores ORDER BY LOWER(name)')
-    Left = 304
+    Left = 232
     Top = 319
   end
   object DataSource1: TDataSource
     DataSet = FDQuery6
-    Left = 176
-    Top = 176
+    Left = 256
+    Top = 96
   end
   object FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink
-    Left = 296
-    Top = 176
+    Left = 376
+    Top = 96
   end
   object FDQuery2: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
       'INSERT INTO stores (name) VALUES (:name)')
-    Left = 456
+    Left = 384
     Top = 319
     ParamData = <
       item
@@ -250,7 +250,7 @@ object Form1: TForm1
       'id INTEGER PRIMARY KEY AUTOINCREMENT, '
       'name VARCHAR(20))')
     Left = 72
-    Top = 320
+    Top = 184
   end
   object FDQuery5: TFDQuery
     Connection = FDConnection1
@@ -264,8 +264,8 @@ object Form1: TForm1
       'quantity INTEGER,'
       'store_id INTEGER,'
       'assigned INTEGER)')
-    Left = 144
-    Top = 320
+    Left = 72
+    Top = 240
   end
   object FDQuery6: TFDQuery
     Connection = FDConnection1
@@ -287,7 +287,7 @@ object Form1: TForm1
       '  on s.id = si.store_id'
       ''
       'where s.name = :store')
-    Left = 368
+    Left = 296
     Top = 248
     ParamData = <
       item
@@ -311,7 +311,7 @@ object Form1: TForm1
       ':quant,'
       ':note'
       ')')
-    Left = 456
+    Left = 384
     Top = 248
     ParamData = <
       item
@@ -346,8 +346,8 @@ object Form1: TForm1
       'CREATE TABLE IF NOT EXISTS store_items ('
       'store_id INTEGER, '
       'item_id INTEGER)')
-    Left = 216
-    Top = 320
+    Left = 72
+    Top = 296
   end
   object FDQuery9: TFDQuery
     Connection = FDConnection1
@@ -355,7 +355,7 @@ object Form1: TForm1
       
         'INSERT INTO store_items (store_id, item_id) VALUES (:store, :ite' +
         'm)')
-    Left = 456
+    Left = 384
     Top = 176
     ParamData = <
       item
@@ -399,7 +399,7 @@ object Form1: TForm1
     Connection = FDConnection1
     SQL.Strings = (
       'SELECT id FROM stores where name =  :name')
-    Left = 368
+    Left = 296
     Top = 319
     ParamData = <
       item
@@ -418,7 +418,7 @@ object Form1: TForm1
       '  quantity,'
       '  note'
       'from items')
-    Left = 304
+    Left = 232
     Top = 248
   end
 end
