@@ -139,7 +139,7 @@ begin
     StoreTabs.Free;
   except
     on E: Exception do
-    ShowMessage('Error creating record: ' + E.Message);
+      ShowMessage('Error creating record: ' + E.Message);
   end;
 end;
 
@@ -168,7 +168,7 @@ begin
     ShowFirstTab();
   except
     on E: Exception do
-    ShowMessage('Error deleting record: ' + E.Message);
+      ShowMessage('Error deleting record: ' + E.Message);
   end;
 end;
 
@@ -204,7 +204,7 @@ begin
     FDQuery6.Open;
   except
     on E: Exception do
-    ShowMessage('Error inserting item: ' + E.Message);
+      ShowMessage('Error inserting item: ' + E.Message);
   end;
 end;
 
@@ -221,7 +221,7 @@ begin
       FDQuery13.Open;
     except
       on E: Exception do
-      ShowMessage('Error deleting item: ' + E.Message);
+        ShowMessage('Error deleting item: ' + E.Message);
     end;
   end
   else
@@ -235,7 +235,8 @@ begin
       FDQuery6.ParamByName('store').AsString := TabControl1.Tabs[TabControl1.TabIndex];
       FDQuery6.Open;
     except
-      ShowMessage('Error removing item: ' + E.Message);
+      on E: Exception do
+        ShowMessage('Error removing item: ' + E.Message);
     end;
   end;
 end;
@@ -254,7 +255,7 @@ begin
     show_stores(Sender);
   except
     on E: Exception do
-    ShowMessage('Error creating tables: ' + E.Message);
+      ShowMessage('Error creating tables: ' + E.Message);
   end;
 end;
 
@@ -280,7 +281,7 @@ begin
     FDQuery1.Close;
   except
     on E: Exception do
-    ShowMessage('Error showing store: ' + E.Message);
+      ShowMessage('Error showing store: ' + E.Message);
   end;
 end;
 
