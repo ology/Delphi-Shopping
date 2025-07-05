@@ -118,7 +118,7 @@ object Form1: TForm1
       end
       object Label8: TLabel
         Left = 24
-        Top = 122
+        Top = 126
         Width = 44
         Height = 15
         Caption = 'To store:'
@@ -186,7 +186,7 @@ object Form1: TForm1
       end
       object ComboBox1: TComboBox
         Left = 96
-        Top = 122
+        Top = 126
         Width = 145
         Height = 23
         TabOrder = 8
