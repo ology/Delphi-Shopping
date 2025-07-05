@@ -275,7 +275,6 @@ begin
   FDQuery1.Open;
   if FDQuery1.RecordCount > 0 then
   begin
-    ComboBox1.Items.Clear;
     try
       FDQuery1.First;
       while not FDQuery1.Eof do
