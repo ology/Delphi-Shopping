@@ -212,7 +212,6 @@ end;
 // delete item
 procedure TForm1.Button4Click(Sender: TObject);
 begin
-//  ShowMessage(inttostr(CurrentRowNumber()));
   if TabControl1.TabIndex = 0 then
   begin
     if MessageDlg('Delete item id ' + GetFieldValue(0) + '?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
