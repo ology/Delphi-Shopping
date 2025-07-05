@@ -217,12 +217,10 @@ begin
   begin
     if MessageDlg('Delete item id ' + GetFieldValue(0) + '?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
     try
-    begin
       FDQuery11.ParamByName('id').AsInteger := StrToInt(GetFieldValue(0));
       FDQuery11.ExecSQL;
       FDQuery13.Close;
       FDQuery13.Open;
-    end;
     except
       ShowMessage('Cannot delete item');
     end;
@@ -231,14 +229,12 @@ begin
   begin
     if MessageDlg('Remove item id ' + GetFieldValue(0) + ' from store?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
     try
-    begin
       FDQuery10.ParamByName('store').AsInteger := 0;
       FDQuery10.ParamByName('item').AsInteger := StrToInt(GetFieldValue(0));
       FDQuery10.ExecSQL;
       FDQuery6.Close;
       FDQuery6.ParamByName('store').AsString := TabControl1.Tabs[TabControl1.TabIndex];
       FDQuery6.Open;
-    end;
     except
       ShowMessage('Cannot remove item');
     end;
