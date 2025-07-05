@@ -421,4 +421,60 @@ object Form1: TForm1
     Left = 232
     Top = 248
   end
+  object FDQuery14: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'update items set'
+      '  name=:name,'
+      '  category=:cat,'
+      '  price=:price,'
+      '  quantity=:quant,'
+      '  note=:note')
+    Left = 456
+    Top = 248
+    ParamData = <
+      item
+        Name = 'NAME'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'CAT'
+        DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'PRICE'
+        DataType = ftCurrency
+        ParamType = ptInput
+      end
+      item
+        Name = 'QUANT'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Name = 'NOTE'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+  end
+  object FDQuery15: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      
+        'SELECT * FROM store_items where store_id=:store AND item_id=:ite' +
+        'm LIMIT 1')
+    Left = 296
+    Top = 176
+    ParamData = <
+      item
+        Name = 'STORE'
+        ParamType = ptInput
+      end
+      item
+        Name = 'ITEM'
+        ParamType = ptInput
+      end>
+  end
 end

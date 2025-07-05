@@ -54,6 +54,8 @@ type
     Button4: TButton;
     Button5: TButton;
     ComboBox1: TComboBox;
+    FDQuery14: TFDQuery;
+    FDQuery15: TFDQuery;
     procedure ShowFirstTab();
     procedure ShowStoreTab(name: string);
     procedure FormCreate(Sender: TObject);
