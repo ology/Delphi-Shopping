@@ -56,6 +56,8 @@ type
     ComboBox1: TComboBox;
     FDQuery14: TFDQuery;
     FDQuery15: TFDQuery;
+    Button6: TButton;
+    Button7: TButton;
     procedure ShowFirstTab();
     procedure ShowStoreTab(name: string);
     procedure FormCreate(Sender: TObject);
@@ -102,10 +104,8 @@ begin
   FDQuery13.Close;
   FDQuery13.Open;
   Visible := True;
-  Label1.Visible := True;
-  Edit1.Visible := True;
-  Edit1.SetFocus();
-  Button1.Visible := True;
+  Label1.Caption := 'New store:';
+  Edit1.SetFocus;
   Button2.Visible := False;
 end;
 
@@ -115,9 +115,7 @@ begin
   FDQuery6.Close;
   FDQuery6.ParamByName('store').AsString := name;
   FDQuery6.Open;
-  Label1.Visible := False;
-  Edit1.Visible := False;
-  Button1.Visible := False;
+  Label1.Caption := 'Rename store:';
   Button2.Visible := True;
 end;
 

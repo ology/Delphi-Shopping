@@ -23,29 +23,29 @@ object Form1: TForm1
     OnChange = TabControl1Change
     object Label1: TLabel
       Left = 32
-      Top = 28
+      Top = 36
       Width = 56
       Height = 15
       Caption = 'New store:'
     end
     object Label7: TLabel
       Left = 32
-      Top = 56
+      Top = 67
       Width = 32
       Height = 15
       Caption = 'Items:'
     end
     object Edit1: TEdit
-      Left = 94
-      Top = 25
+      Left = 112
+      Top = 33
       Width = 121
       Height = 23
       TabOrder = 0
       OnEnter = new_store
     end
     object Button1: TButton
-      Left = 221
-      Top = 24
+      Left = 239
+      Top = 32
       Width = 75
       Height = 25
       Caption = 'Submit'
@@ -54,7 +54,7 @@ object Form1: TForm1
     end
     object Button2: TButton
       Left = 488
-      Top = 24
+      Top = 32
       Width = 99
       Height = 25
       Caption = 'Remove store'
@@ -64,9 +64,9 @@ object Form1: TForm1
     end
     object DBGrid1: TDBGrid
       Left = 32
-      Top = 77
+      Top = 88
       Width = 555
-      Height = 332
+      Height = 321
       DataSource = DataSource1
       TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
@@ -163,13 +163,13 @@ object Form1: TForm1
         Top = 77
         Width = 75
         Height = 25
-        Caption = 'Submit'
+        Caption = 'New'
         TabOrder = 5
         OnClick = Button3Click
       end
       object Button4: TButton
         Left = 456
-        Top = 120
+        Top = 124
         Width = 75
         Height = 25
         Caption = 'Remove'
@@ -191,6 +191,24 @@ object Form1: TForm1
         Height = 23
         TabOrder = 8
         Text = 'Select...'
+      end
+      object Button6: TButton
+        Left = 456
+        Top = 45
+        Width = 75
+        Height = 25
+        Caption = 'Update'
+        TabOrder = 9
+        OnClick = Button3Click
+      end
+      object Button7: TButton
+        Left = 358
+        Top = 124
+        Width = 75
+        Height = 25
+        Caption = 'Clear'
+        TabOrder = 10
+        OnClick = Button4Click
       end
     end
   end
