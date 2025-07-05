@@ -66,7 +66,7 @@ object Form1: TForm1
       Left = 32
       Top = 85
       Width = 555
-      Height = 316
+      Height = 324
       DataSource = DataSource1
       TabOrder = 3
       TitleFont.Charset = DEFAULT_CHARSET
