@@ -220,7 +220,8 @@ begin
       FDQuery13.Close;
       FDQuery13.Open;
     except
-      ShowMessage('Cannot delete item');
+      on E: Exception do
+      ShowMessage('Error deleting item: ' + E.Message);
     end;
   end
   else
@@ -234,7 +235,7 @@ begin
       FDQuery6.ParamByName('store').AsString := TabControl1.Tabs[TabControl1.TabIndex];
       FDQuery6.Open;
     except
-      ShowMessage('Cannot remove item');
+      ShowMessage('Error removing item: ' + E.Message);
     end;
   end;
 end;
@@ -242,8 +243,7 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   try
-    if not FDConnection1.Connected then
-      FDConnection1.Open;
+    if not FDConnection1.Connected then FDConnection1.Open;
     FDQuery4.ExecSQL; // stores
     FDQuery5.ExecSQL; // items
     FDQuery8.ExecSQL; // store_items
@@ -280,7 +280,7 @@ begin
     FDQuery1.Close;
   except
     on E: Exception do
-    ShowMessage('Error showing record: ' + E.Message);
+    ShowMessage('Error showing store: ' + E.Message);
   end;
 end;
 
