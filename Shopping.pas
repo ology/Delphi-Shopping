@@ -71,6 +71,7 @@ type
     procedure Button4Click(Sender: TObject);
     function CurrentRowNumber(): integer;
     function GetFieldValue(colnum : integer): string;
+    procedure Button7Click(Sender: TObject);
   private
     { Private declarations }
     store_names: TStringList;
@@ -239,6 +240,15 @@ begin
         ShowMessage('Error removing item: ' + E.Message);
     end;
   end;
+end;
+
+procedure TForm1.Button7Click(Sender: TObject);
+begin
+  Edit2.Clear;
+  Edit3.Clear;
+  Edit4.Clear;
+  Edit5.Clear;
+  Memo1.Clear;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);

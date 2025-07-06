@@ -208,7 +208,7 @@ object Form1: TForm1
         Height = 25
         Caption = 'Clear'
         TabOrder = 10
-        OnClick = Button4Click
+        OnClick = Button7Click
       end
     end
   end
