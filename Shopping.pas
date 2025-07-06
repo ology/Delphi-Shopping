@@ -192,6 +192,7 @@ end;
 procedure TForm1.Button3Click(Sender: TObject);
 var
   NewID: Variant;
+  price: String;
 begin
   if Edit2.Text = '' then Exit;
   if MessageDlg('Add a new item?', mtConfirmation, [mbYes, mbNo], 0) in [mrNo, mrCancel] then Exit;
@@ -204,9 +205,13 @@ begin
     Exit;
   end;
   try
+    if Copy(Edit5.Text, 1, 1) = '$' then
+      price := Copy(Edit5.Text, 2, Length(Edit5.Text))
+    else
+      price := Edit5.Text;
     FDQuery7.ParamByName('name').AsString := Edit2.Text;
     FDQuery7.ParamByName('cat').AsString := Edit3.Text;
-    FDQuery7.ParamByName('price').AsFloat := StrToFloat(Edit5.Text);
+    FDQuery7.ParamByName('price').AsFloat := StrToFloat(price);
     FDQuery7.ParamByName('quant').AsInteger := StrToInt(Edit4.Text);
     FDQuery7.ParamByName('note').AsString := Memo1.Lines.Text;
     FDQuery7.ExecSQL;
@@ -306,7 +311,7 @@ begin
     FDQuery14.ParamByName('cat').AsString := Edit3.Text;
     FDQuery14.ParamByName('quant').AsInteger := StrToInt(Edit4.Text);
     if Copy(Edit5.Text, 1, 1) = '$' then
-      price := Copy(Edit5.Text, 2, Length(Edit4.Text))
+      price := Copy(Edit5.Text, 2, Length(Edit5.Text))
     else
       price := Edit5.Text;
     FDQuery14.ParamByName('price').AsFloat := StrToFloat(price);
