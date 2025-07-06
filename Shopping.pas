@@ -260,10 +260,12 @@ end;
 procedure TForm1.Button6Click(Sender: TObject);
 var
   price: String;
+  id: Integer;
 begin
   if Edit2.Text = '' then Exit;
   if MessageDlg('Update item?', mtConfirmation, [mbYes, mbNo], 0) in [mrNo, mrCancel] then Exit;
   try
+    id := StrToInt(GetFieldValue(0));
     FDQuery14.ParamByName('name').AsString := Edit2.Text;
     FDQuery14.ParamByName('cat').AsString := Edit3.Text;
     FDQuery14.ParamByName('quant').AsInteger := StrToInt(Edit4.Text);
@@ -273,7 +275,7 @@ begin
       price := Edit5.Text;
     FDQuery14.ParamByName('price').AsFloat := StrToFloat(price);
     FDQuery14.ParamByName('note').AsString := Memo1.Text;
-    FDQuery14.ParamByName('id').AsInteger := StrToInt(GetFieldValue(0));
+    FDQuery14.ParamByName('id').AsInteger := id;
     FDQuery14.ExecSQL;
     if ComboBox1.ItemIndex >= 0 then
     begin
@@ -282,16 +284,16 @@ begin
       FDQuery12.Open;
       FDQuery15.Close;
       FDQuery15.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
-      FDQuery15.ParamByName('item').AsInteger := StrToInt(GetFieldValue(0));
+      FDQuery15.ParamByName('item').AsInteger := id;
       FDQuery15.Open;
-      if FDQuery12.RecordCount < 1 then
+      if FDQuery12.RecordCount >= 1 then
+        ShowMessage('Item already exists in store.')
+      else
       begin
         FDQuery9.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
-        FDQuery9.ParamByName('item').AsInteger := StrToInt(GetFieldValue(0));
+        FDQuery9.ParamByName('item').AsInteger := id;
         FDQuery9.ExecSQL;
-      end
-      else
-        ShowMessage('Item already exists in store.');
+      end;
     end;
   except
       on E: Exception do

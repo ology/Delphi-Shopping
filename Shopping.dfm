@@ -271,7 +271,7 @@ object Form1: TForm1
       'id INTEGER PRIMARY KEY AUTOINCREMENT, '
       'name VARCHAR(20))')
     Left = 72
-    Top = 184
+    Top = 344
   end
   object FDQuery5: TFDQuery
     Connection = FDConnection1
@@ -281,12 +281,10 @@ object Form1: TForm1
       'name VARCHAR(20),'
       'note VARCHAR(255),'
       'category VARCHAR(20),'
-      'price CURRENCY,'
       'quantity INTEGER,'
-      'store_id INTEGER,'
-      'assigned INTEGER)')
+      'price CURRENCY)')
     Left = 72
-    Top = 240
+    Top = 248
   end
   object FDQuery6: TFDQuery
     Connection = FDConnection1
@@ -368,7 +366,7 @@ object Form1: TForm1
       'store_id INTEGER, '
       'item_id INTEGER)')
     Left = 72
-    Top = 296
+    Top = 160
   end
   object FDQuery9: TFDQuery
     Connection = FDConnection1
@@ -448,8 +446,8 @@ object Form1: TForm1
       'update items set'
       '  name=:name,'
       '  category=:cat,'
-      '  price=:price,'
       '  quantity=:quant,'
+      '  price=:price,'
       '  note=:note'
       'where id=:id')
     Left = 456
@@ -466,13 +464,13 @@ object Form1: TForm1
         ParamType = ptInput
       end
       item
-        Name = 'PRICE'
-        DataType = ftCurrency
+        Name = 'QUANT'
+        DataType = ftInteger
         ParamType = ptInput
       end
       item
-        Name = 'QUANT'
-        DataType = ftInteger
+        Name = 'PRICE'
+        DataType = ftCurrency
         ParamType = ptInput
       end
       item
@@ -488,9 +486,10 @@ object Form1: TForm1
   object FDQuery15: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      
-        'SELECT * FROM store_items where store_id=:store AND item_id=:ite' +
-        'm LIMIT 1')
+      'SELECT *'
+      'FROM store_items'
+      'WHERE store_id=:store'
+      '  AND item_id=:item LIMIT 1')
     Left = 296
     Top = 160
     ParamData = <
