@@ -182,7 +182,7 @@ var
   NewID: Variant;
 begin
   if Edit2.Text = '' then Exit;
-  if MessageDlg('New item?', mtConfirmation, [mbYes, mbNo], 0) in [mrNo, mrCancel] then Exit;
+  if MessageDlg('Add a new item?', mtConfirmation, [mbYes, mbNo], 0) in [mrNo, mrCancel] then Exit;
   FDQuery16.Close;
   FDQuery16.ParamByName('name').AsString := Edit2.Text;
   FDQuery16.Open;
