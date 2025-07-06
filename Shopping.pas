@@ -75,6 +75,7 @@ type
     procedure Button7Click(Sender: TObject);
     procedure DBGrid1CellClick(Column: TColumn);
     procedure Button6Click(Sender: TObject);
+    procedure clear_form();
   private
     { Private declarations }
     store_names: TStringList;
@@ -121,6 +122,16 @@ begin
   FDQuery6.Open;
   Label1.Caption := 'Rename store:';
   Button2.Visible := True;
+end;
+
+procedure TForm1.clear_form();
+begin
+  Edit2.Clear;
+  Edit3.Clear;
+  Edit4.Clear;
+  Edit5.Clear;
+  Memo1.Clear;
+  ComboBox1.ItemIndex := -1;
 end;
 
 // new store
@@ -230,11 +241,7 @@ begin
             ShowMessage('Error inserting store item: ' + E.Message);
       end;
     end;
-    Edit2.Text := '';
-    Edit3.Text := '';
-    Edit4.Text := '';
-    Edit5.Text := '';
-    Memo1.Lines.Text := '';
+    clear_form;
     if TabControl1.TabIndex = 0 then
     begin
       FDQuery13.Close;
@@ -348,11 +355,7 @@ end;
 procedure TForm1.Button7Click(Sender: TObject);
 begin
   if MessageDlg('Clear form?', mtConfirmation, [mbYes, mbNo], 0) in [mrNo, mrCancel] then Exit;
-  Edit2.Clear;
-  Edit3.Clear;
-  Edit4.Clear;
-  Edit5.Clear;
-  Memo1.Clear;
+  clear_form;
 end;
 
 // populate form

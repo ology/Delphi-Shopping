@@ -193,7 +193,6 @@ object Form1: TForm1
         Width = 145
         Height = 23
         TabOrder = 8
-        Text = 'Select...'
       end
       object Button6: TButton
         Left = 456
