@@ -221,7 +221,7 @@ object Form1: TForm1
       
         'Database=C:\cygwin64\home\diamo\repos\Delphi-Shopping\Shopping.d' +
         'b')
-    Left = 168
+    Left = 72
     Top = 96
   end
   object FDQuery1: TFDQuery
@@ -233,11 +233,11 @@ object Form1: TForm1
   end
   object DataSource1: TDataSource
     DataSet = FDQuery6
-    Left = 256
+    Left = 160
     Top = 96
   end
   object FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink
-    Left = 376
+    Left = 280
     Top = 96
   end
   object FDQuery2: TFDQuery
@@ -377,7 +377,7 @@ object Form1: TForm1
         'INSERT INTO store_items (store_id, item_id) VALUES (:store, :ite' +
         'm)')
     Left = 384
-    Top = 176
+    Top = 136
     ParamData = <
       item
         Name = 'STORE'
@@ -393,7 +393,7 @@ object Form1: TForm1
     SQL.Strings = (
       'DELETE FROM store_items WHERE store_id=:store OR item_id=:item')
     Left = 528
-    Top = 176
+    Top = 160
     ParamData = <
       item
         Name = 'STORE'
@@ -492,7 +492,7 @@ object Form1: TForm1
         'SELECT * FROM store_items where store_id=:store AND item_id=:ite' +
         'm LIMIT 1')
     Left = 296
-    Top = 176
+    Top = 160
     ParamData = <
       item
         Name = 'STORE'
@@ -515,6 +515,25 @@ object Form1: TForm1
     ParamData = <
       item
         Name = 'NAME'
+        ParamType = ptInput
+      end>
+  end
+  object FDQuery17: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'INSERT INTO store_items (store_id, item_id)'
+      'SELECT s.id, i.id FROM stores s, items i'
+      'WHERE s.name=:store'
+      'AND i.id=:item_id')
+    Left = 384
+    Top = 192
+    ParamData = <
+      item
+        Name = 'STORE'
+        ParamType = ptInput
+      end
+      item
+        Name = 'ITEM_ID'
         ParamType = ptInput
       end>
   end

@@ -59,6 +59,7 @@ type
     Button6: TButton;
     Button7: TButton;
     FDQuery16: TFDQuery;
+    FDQuery17: TFDQuery;
     procedure ShowFirstTab();
     procedure ShowStoreTab(name: string);
     procedure FormCreate(Sender: TObject);
