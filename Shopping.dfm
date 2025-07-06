@@ -82,6 +82,7 @@ object Form1: TForm1
       Top = 421
       Width = 555
       Height = 161
+      BevelKind = bkSoft
       TabOrder = 4
       object Label2: TLabel
         Left = 24
