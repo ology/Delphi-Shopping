@@ -334,11 +334,11 @@ end;
 // populate form
 procedure TForm1.DBGrid1CellClick(Column: TColumn);
 begin
-  Edit2.Text := GetFieldValue(1);
-  Edit3.Text := GetFieldValue(2);
-  Edit4.Text := GetFieldValue(3);
-  Edit5.Text := GetFieldValue(4);
-  Memo1.Text := GetFieldValue(5);
+  Edit2.Text := GetFieldValue(1); // name
+  Edit3.Text := GetFieldValue(2); // category
+  Edit4.Text := GetFieldValue(3); // quantity
+  Edit5.Text := GetFieldValue(4); // price
+  Memo1.Text := GetFieldValue(5); // note
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);

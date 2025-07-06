@@ -279,10 +279,10 @@ object Form1: TForm1
       'CREATE TABLE IF NOT EXISTS items ('
       'id INTEGER PRIMARY KEY AUTOINCREMENT,'
       'name VARCHAR(20),'
-      'note VARCHAR(255),'
       'category VARCHAR(20),'
       'quantity INTEGER,'
-      'price CURRENCY)')
+      'price CURRENCY,'
+      'note VARCHAR(255))')
     Left = 72
     Top = 248
   end
@@ -293,8 +293,8 @@ object Form1: TForm1
       '  i.id,'
       '  i.name,'
       '  i.category,'
-      '  i.price,'
       '  i.quantity,'
+      '  i.price,'
       '  i.note'
       ''
       'from items as i'
@@ -320,14 +320,14 @@ object Form1: TForm1
       'insert into items ('
       'name,'
       'category,'
-      'price,'
       'quantity,'
+      'price,'
       'note)'
       'values ('
       ':name,'
       ':cat,'
-      ':price,'
       ':quant,'
+      ':price,'
       ':note'
       ')')
     Left = 384
@@ -344,13 +344,13 @@ object Form1: TForm1
         ParamType = ptInput
       end
       item
-        Name = 'PRICE'
-        DataType = ftCurrency
+        Name = 'QUANT'
+        DataType = ftInteger
         ParamType = ptInput
       end
       item
-        Name = 'QUANT'
-        DataType = ftInteger
+        Name = 'PRICE'
+        DataType = ftCurrency
         ParamType = ptInput
       end
       item
@@ -433,8 +433,8 @@ object Form1: TForm1
       '  id,'
       '  name,'
       '  category,'
-      '  price,'
       '  quantity,'
+      '  price,'
       '  note'
       'from items')
     Left = 232
