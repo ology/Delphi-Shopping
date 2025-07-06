@@ -153,7 +153,6 @@ object Form1: TForm1
         Top = 45
         Width = 57
         Height = 23
-        NumbersOnly = True
         TabOrder = 3
       end
       object Memo1: TMemo

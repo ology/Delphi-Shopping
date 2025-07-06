@@ -306,43 +306,51 @@ begin
   if Edit2.Text = '' then Exit;
   if MessageDlg('Update item?', mtConfirmation, [mbYes, mbNo], 0) in [mrNo, mrCancel] then Exit;
   try
-    id := StrToInt(GetFieldValue(0));
-    FDQuery14.ParamByName('name').AsString := Edit2.Text;
-    FDQuery14.ParamByName('cat').AsString := Edit3.Text;
-    FDQuery14.ParamByName('quant').AsInteger := StrToInt(Edit4.Text);
-    if Copy(Edit5.Text, 1, 1) = '$' then
-      price := Copy(Edit5.Text, 2, Length(Edit5.Text))
+    FDQuery16.Close;
+    FDQuery16.ParamByName('name').AsString := Edit2.Text;
+    FDQuery16.Open;
+    if FDQuery16.RecordCount > 0 then
+      Button3Click(Sender)
     else
-      price := Edit5.Text;
-    FDQuery14.ParamByName('price').AsFloat := StrToFloat(price);
-    FDQuery14.ParamByName('note').AsString := Memo1.Text;
-    FDQuery14.ParamByName('id').AsInteger := id;
-    FDQuery14.ExecSQL;
-    if ComboBox1.ItemIndex >= 0 then
     begin
-      FDQuery12.Close;
-      FDQuery12.ParamByName('name').AsString := ComboBox1.Items[ComboBox1.ItemIndex];
-      FDQuery12.Open;
-      FDQuery15.Close;
-      FDQuery15.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
-      FDQuery15.ParamByName('item').AsInteger := id;
-      FDQuery15.Open;
-      if FDQuery15.RecordCount >= 1 then
-        ShowMessage('Item already exists in store.')
+      id := StrToInt(GetFieldValue(0));
+      FDQuery14.ParamByName('name').AsString := Edit2.Text;
+      FDQuery14.ParamByName('cat').AsString := Edit3.Text;
+      FDQuery14.ParamByName('quant').AsInteger := StrToInt(Edit4.Text);
+      if Copy(Edit5.Text, 1, 1) = '$' then
+        price := Copy(Edit5.Text, 2, Length(Edit5.Text))
       else
-      try
-        FDQuery9.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
-        FDQuery9.ParamByName('item').AsInteger := id;
-        FDQuery9.ExecSQL;
-      except
-          on E: Exception do
-            ShowMessage('Error inserting store item: ' + E.Message);
+        price := Edit5.Text;
+      FDQuery14.ParamByName('price').AsFloat := StrToFloat(price);
+      FDQuery14.ParamByName('note').AsString := Memo1.Text;
+      FDQuery14.ParamByName('id').AsInteger := id;
+      FDQuery14.ExecSQL;
+      if ComboBox1.ItemIndex >= 0 then
+      begin
+        FDQuery12.Close;
+        FDQuery12.ParamByName('name').AsString := ComboBox1.Items[ComboBox1.ItemIndex];
+        FDQuery12.Open;
+        FDQuery15.Close;
+        FDQuery15.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
+        FDQuery15.ParamByName('item').AsInteger := id;
+        FDQuery15.Open;
+        if FDQuery15.RecordCount >= 1 then
+          ShowMessage('Item already exists in store.')
+        else
+        try
+          FDQuery9.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
+          FDQuery9.ParamByName('item').AsInteger := id;
+          FDQuery9.ExecSQL;
+        except
+            on E: Exception do
+              ShowMessage('Error inserting store item: ' + E.Message);
+        end;
       end;
     end;
-  except
-      on E: Exception do
-        ShowMessage('Error updating item: ' + E.Message);
-  end;
+    except
+        on E: Exception do
+          ShowMessage('Error updating item: ' + E.Message);
+    end;
   if TabControl1.TabIndex = 0 then
   begin
     FDQuery13.Close;
