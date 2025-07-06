@@ -310,7 +310,7 @@ begin
     FDQuery16.ParamByName('name').AsString := Edit2.Text;
     FDQuery16.Open;
     if FDQuery16.RecordCount > 0 then
-      Button3Click(Sender)
+      Button3Click(Sender) // new item
     else
     begin
       id := StrToInt(GetFieldValue(0));
