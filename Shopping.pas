@@ -181,37 +181,35 @@ var
   NewID: Variant;
 begin
   if Edit2.Text = '' then Exit;
-  if MessageDlg('New item?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-  begin
-    try
-      FDQuery7.ParamByName('name').AsString := Edit2.Text;
-      FDQuery7.ParamByName('cat').AsString := Edit3.Text;
-      FDQuery7.ParamByName('price').AsFloat := StrToFloat(Edit5.Text);
-      FDQuery7.ParamByName('quant').AsInteger := StrToInt(Edit4.Text);
-      FDQuery7.ParamByName('note').AsString := Memo1.Lines.Text;
-      FDQuery7.ExecSQL;
-      NewID := FDQuery7.Connection.GetLastAutoGenValue('items');
-      if TabControl1.TabIndex > 0 then
-      begin
-        FDQuery12.Close;
-        FDQuery12.ParamByName('name').AsString := TabControl1.Tabs[TabControl1.TabIndex];
-        FDQuery12.Open;
-        FDQuery9.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
-        FDQuery9.ParamByName('item').AsInteger := NewID;
-        FDQuery9.ExecSQL;
-      end;
-      Edit2.Text := '';
-      Edit3.Text := '';
-      Edit4.Text := '';
-      Edit5.Text := '';
-      Memo1.Lines.Text := '';
-      FDQuery6.Close;
-      FDQuery6.ParamByName('store').AsString := TabControl1.Tabs[TabControl1.TabIndex];
-      FDQuery6.Open;
-    except
-      on E: Exception do
-        ShowMessage('Error inserting item: ' + E.Message);
+  if MessageDlg('New item?', mtConfirmation, [mbYes, mbNo], 0) in [mrNo, mrCancel] then Exit;
+  try
+    FDQuery7.ParamByName('name').AsString := Edit2.Text;
+    FDQuery7.ParamByName('cat').AsString := Edit3.Text;
+    FDQuery7.ParamByName('price').AsFloat := StrToFloat(Edit5.Text);
+    FDQuery7.ParamByName('quant').AsInteger := StrToInt(Edit4.Text);
+    FDQuery7.ParamByName('note').AsString := Memo1.Lines.Text;
+    FDQuery7.ExecSQL;
+    NewID := FDQuery7.Connection.GetLastAutoGenValue('items');
+    if TabControl1.TabIndex > 0 then
+    begin
+      FDQuery12.Close;
+      FDQuery12.ParamByName('name').AsString := TabControl1.Tabs[TabControl1.TabIndex];
+      FDQuery12.Open;
+      FDQuery9.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
+      FDQuery9.ParamByName('item').AsInteger := NewID;
+      FDQuery9.ExecSQL;
     end;
+    Edit2.Text := '';
+    Edit3.Text := '';
+    Edit4.Text := '';
+    Edit5.Text := '';
+    Memo1.Lines.Text := '';
+    FDQuery6.Close;
+    FDQuery6.ParamByName('store').AsString := TabControl1.Tabs[TabControl1.TabIndex];
+    FDQuery6.Open;
+  except
+    on E: Exception do
+      ShowMessage('Error inserting item: ' + E.Message);
   end;
 end;
 
@@ -251,44 +249,40 @@ end;
 procedure TForm1.Button6Click(Sender: TObject);
 begin
   if Edit2.Text = '' then Exit;
-  if MessageDlg('Update item?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  if MessageDlg('Update item?', mtConfirmation, [mbYes, mbNo], 0) in [mrNo, mrCancel] then Exit;
+  try
+    FDQuery14.ParamByName('name').AsString := Edit2.Text;
+    FDQuery14.ParamByName('cat').AsString := Edit3.Text;
+    FDQuery14.ParamByName('price').AsFloat := StrToFloat(Copy(Edit4.Text, 2, Length(Edit4.Text)));
+    FDQuery14.ParamByName('quant').AsInteger := StrToInt(Edit5.Text);
+    FDQuery14.ParamByName('note').AsString := Memo1.Text;
+    FDQuery14.ParamByName('id').AsString := GetFieldValue(0);
+    FDQuery14.ExecSQL;
+  except
+      on E: Exception do
+        ShowMessage('Error updating item: ' + E.Message);
+  end;
+  if TabControl1.TabIndex = 0 then
   begin
-    try
-      FDQuery14.ParamByName('name').AsString := Edit2.Text;
-      FDQuery14.ParamByName('cat').AsString := Edit3.Text;
-      FDQuery14.ParamByName('price').AsFloat := StrToFloat(Copy(Edit4.Text, 2, Length(Edit4.Text)));
-      FDQuery14.ParamByName('quant').AsInteger := StrToInt(Edit5.Text);
-      FDQuery14.ParamByName('note').AsString := Memo1.Text;
-      FDQuery14.ParamByName('id').AsString := GetFieldValue(0);
-      FDQuery14.ExecSQL;
-    except
-        on E: Exception do
-          ShowMessage('Error updating item: ' + E.Message);
-    end;
-    if TabControl1.TabIndex = 0 then
-    begin
-      FDQuery13.Close;
-      FDQuery13.Open;
-    end
-    else
-    begin
-      FDQuery6.Close;
-      FDQuery6.ParamByName('store').AsString := TabControl1.Tabs[TabControl1.TabIndex];
-      FDQuery6.Open;
-    end;
+    FDQuery13.Close;
+    FDQuery13.Open;
+  end
+  else
+  begin
+    FDQuery6.Close;
+    FDQuery6.ParamByName('store').AsString := TabControl1.Tabs[TabControl1.TabIndex];
+    FDQuery6.Open;
   end;
 end;
 
 procedure TForm1.Button7Click(Sender: TObject);
 begin
-  if MessageDlg('Clear form?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-  begin
-    Edit2.Clear;
-    Edit3.Clear;
-    Edit4.Clear;
-    Edit5.Clear;
-    Memo1.Clear;
-  end;
+  if MessageDlg('Clear form?', mtConfirmation, [mbYes, mbNo], 0) in [mrNo, mrCancel] then Exit;
+  Edit2.Clear;
+  Edit3.Clear;
+  Edit4.Clear;
+  Edit5.Clear;
+  Memo1.Clear;
 end;
 
 procedure TForm1.DBGrid1CellClick(Column: TColumn);
