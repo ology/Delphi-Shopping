@@ -200,7 +200,7 @@ object Form1: TForm1
         Height = 25
         Caption = 'Update'
         TabOrder = 9
-        OnClick = Button3Click
+        OnClick = Button6Click
       end
       object Button7: TButton
         Left = 358

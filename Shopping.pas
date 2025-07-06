@@ -73,6 +73,7 @@ type
     function GetFieldValue(colnum : integer): string;
     procedure Button7Click(Sender: TObject);
     procedure DBGrid1CellClick(Column: TColumn);
+    procedure Button6Click(Sender: TObject);
   private
     { Private declarations }
     store_names: TStringList;
@@ -240,6 +241,33 @@ begin
       on E: Exception do
         ShowMessage('Error removing item: ' + E.Message);
     end;
+  end;
+end;
+
+procedure TForm1.Button6Click(Sender: TObject);
+begin
+  try
+    FDQuery14.ParamByName('name').AsString := Edit2.Text;
+    FDQuery14.ParamByName('cat').AsString := Edit3.Text;
+    FDQuery14.ParamByName('price').AsFloat := StrToFloat(Copy(Edit4.Text, 2, Length(Edit4.Text)));
+    FDQuery14.ParamByName('quant').AsInteger := StrToInt(Edit5.Text);
+    FDQuery14.ParamByName('note').AsString := Memo1.Text;
+    FDQuery14.ParamByName('id').AsString := GetFieldValue(0);
+    FDQuery14.ExecSQL;
+  except
+      on E: Exception do
+        ShowMessage('Error updating item: ' + E.Message);
+  end;
+  if TabControl1.TabIndex = 0 then
+  begin
+    FDQuery13.Close;
+    FDQuery13.Open;
+  end
+  else
+  begin
+    FDQuery6.Close;
+    FDQuery6.ParamByName('store').AsString := TabControl1.Tabs[TabControl1.TabIndex];
+    FDQuery6.Open;
   end;
 end;
 
