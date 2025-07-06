@@ -72,6 +72,7 @@ type
     function CurrentRowNumber(): integer;
     function GetFieldValue(colnum : integer): string;
     procedure Button7Click(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
   private
     { Private declarations }
     store_names: TStringList;
@@ -249,6 +250,15 @@ begin
   Edit4.Clear;
   Edit5.Clear;
   Memo1.Clear;
+end;
+
+procedure TForm1.DBGrid1CellClick(Column: TColumn);
+begin
+  Edit2.Text := GetFieldValue(1);
+  Edit3.Text := GetFieldValue(2);
+  Edit4.Text := GetFieldValue(3);
+  Edit5.Text := GetFieldValue(4);
+  Memo1.Text := GetFieldValue(5);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);

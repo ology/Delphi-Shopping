@@ -74,6 +74,7 @@ object Form1: TForm1
       TitleFont.Height = -12
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
+      OnCellClick = DBGrid1CellClick
     end
     object Panel1: TPanel
       Left = 32
