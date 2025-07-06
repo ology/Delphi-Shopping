@@ -294,7 +294,7 @@ begin
       FDQuery15.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
       FDQuery15.ParamByName('item').AsInteger := id;
       FDQuery15.Open;
-      if FDQuery12.RecordCount >= 1 then
+      if FDQuery15.RecordCount >= 1 then
         ShowMessage('Item already exists in store.')
       else
       begin
