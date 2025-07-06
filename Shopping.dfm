@@ -448,7 +448,8 @@ object Form1: TForm1
       '  category=:cat,'
       '  price=:price,'
       '  quantity=:quant,'
-      '  note=:note')
+      '  note=:note'
+      'where id=:id')
     Left = 456
     Top = 248
     ParamData = <
@@ -475,6 +476,10 @@ object Form1: TForm1
       item
         Name = 'NOTE'
         DataType = ftString
+        ParamType = ptInput
+      end
+      item
+        Name = 'ID'
         ParamType = ptInput
       end>
   end
