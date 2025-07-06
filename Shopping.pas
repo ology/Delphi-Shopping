@@ -201,7 +201,7 @@ begin
   FDQuery16.Open;
   if FDQuery16.RecordCount > 0 then
   begin
-    ShowMessage('An item called "' + Edit2.Text + '" already exists.');
+    ShowMessage('An item named "' + Edit2.Text + '" already exists.');
     Exit;
   end;
   try
