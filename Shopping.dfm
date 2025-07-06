@@ -228,7 +228,7 @@ object Form1: TForm1
     SQL.Strings = (
       'SELECT name FROM stores ORDER BY LOWER(name)')
     Left = 232
-    Top = 319
+    Top = 343
   end
   object DataSource1: TDataSource
     DataSet = FDQuery6
@@ -244,7 +244,7 @@ object Form1: TForm1
     SQL.Strings = (
       'INSERT INTO stores (name) VALUES (:name)')
     Left = 384
-    Top = 319
+    Top = 343
     ParamData = <
       item
         Name = 'NAME'
@@ -256,7 +256,7 @@ object Form1: TForm1
     SQL.Strings = (
       'DELETE FROM stores WHERE name = :name')
     Left = 528
-    Top = 319
+    Top = 343
     ParamData = <
       item
         Name = 'NAME'
@@ -308,7 +308,7 @@ object Form1: TForm1
       ''
       'where s.name = :store')
     Left = 296
-    Top = 248
+    Top = 232
     ParamData = <
       item
         Name = 'STORE'
@@ -420,7 +420,7 @@ object Form1: TForm1
     SQL.Strings = (
       'SELECT id FROM stores where name =  :name')
     Left = 296
-    Top = 319
+    Top = 343
     ParamData = <
       item
         Name = 'NAME'
@@ -499,6 +499,21 @@ object Form1: TForm1
       end
       item
         Name = 'ITEM'
+        ParamType = ptInput
+      end>
+  end
+  object FDQuery16: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select  id'
+      'from items'
+      'where name=:name'
+      'limit 1')
+    Left = 296
+    Top = 285
+    ParamData = <
+      item
+        Name = 'NAME'
         ParamType = ptInput
       end>
   end

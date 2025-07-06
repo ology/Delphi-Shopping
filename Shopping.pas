@@ -58,6 +58,7 @@ type
     FDQuery15: TFDQuery;
     Button6: TButton;
     Button7: TButton;
+    FDQuery16: TFDQuery;
     procedure ShowFirstTab();
     procedure ShowStoreTab(name: string);
     procedure FormCreate(Sender: TObject);
@@ -182,6 +183,14 @@ var
 begin
   if Edit2.Text = '' then Exit;
   if MessageDlg('New item?', mtConfirmation, [mbYes, mbNo], 0) in [mrNo, mrCancel] then Exit;
+  FDQuery16.Close;
+  FDQuery16.ParamByName('name').AsString := Edit2.Text;
+  FDQuery16.Open;
+  if FDQuery16.RecordCount > 0 then
+  begin
+    ShowMessage('An item called "' + Edit2.Text + '" already exists.');
+    Exit;
+  end;
   try
     FDQuery7.ParamByName('name').AsString := Edit2.Text;
     FDQuery7.ParamByName('cat').AsString := Edit3.Text;
