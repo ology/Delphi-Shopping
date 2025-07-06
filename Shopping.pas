@@ -214,9 +214,17 @@ begin
     Edit4.Text := '';
     Edit5.Text := '';
     Memo1.Lines.Text := '';
-    FDQuery6.Close;
-    FDQuery6.ParamByName('store').AsString := TabControl1.Tabs[TabControl1.TabIndex];
-    FDQuery6.Open;
+    if TabControl1.TabIndex = 0 then
+    begin
+      FDQuery13.Close;
+      FDQuery13.Open;
+    end
+    else
+    begin
+      FDQuery6.Close;
+      FDQuery6.ParamByName('store').AsString := TabControl1.Tabs[TabControl1.TabIndex];
+      FDQuery6.Open;
+    end;
   except
     on E: Exception do
       ShowMessage('Error inserting item: ' + E.Message);
@@ -312,6 +320,7 @@ begin
   end;
 end;
 
+// clear form
 procedure TForm1.Button7Click(Sender: TObject);
 begin
   if MessageDlg('Clear form?', mtConfirmation, [mbYes, mbNo], 0) in [mrNo, mrCancel] then Exit;
@@ -322,6 +331,7 @@ begin
   Memo1.Clear;
 end;
 
+// populate form
 procedure TForm1.DBGrid1CellClick(Column: TColumn);
 begin
   Edit2.Text := GetFieldValue(1);
