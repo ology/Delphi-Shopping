@@ -209,6 +209,27 @@ begin
       FDQuery9.ParamByName('item').AsInteger := NewID;
       FDQuery9.ExecSQL;
     end;
+    if ComboBox1.ItemIndex >= 0 then
+    begin
+      FDQuery12.Close;
+      FDQuery12.ParamByName('name').AsString := ComboBox1.Items[ComboBox1.ItemIndex];
+      FDQuery12.Open;
+      FDQuery15.Close;
+      FDQuery15.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
+      FDQuery15.ParamByName('item').AsInteger := NewID;
+      FDQuery15.Open;
+      if FDQuery15.RecordCount >= 1 then
+        ShowMessage('Item already exists in store.')
+      else
+      try
+        FDQuery9.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
+        FDQuery9.ParamByName('item').AsInteger := NewID;
+        FDQuery9.ExecSQL;
+      except
+          on E: Exception do
+            ShowMessage('Error inserting store item: ' + E.Message);
+      end;
+    end;
     Edit2.Text := '';
     Edit3.Text := '';
     Edit4.Text := '';
@@ -297,10 +318,13 @@ begin
       if FDQuery15.RecordCount >= 1 then
         ShowMessage('Item already exists in store.')
       else
-      begin
+      try
         FDQuery9.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
         FDQuery9.ParamByName('item').AsInteger := id;
         FDQuery9.ExecSQL;
+      except
+          on E: Exception do
+            ShowMessage('Error inserting store item: ' + E.Message);
       end;
     end;
   except
