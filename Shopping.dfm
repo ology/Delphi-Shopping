@@ -377,7 +377,7 @@ object Form1: TForm1
         'INSERT INTO store_items (store_id, item_id) VALUES (:store, :ite' +
         'm)')
     Left = 384
-    Top = 136
+    Top = 160
     ParamData = <
       item
         Name = 'STORE'
@@ -419,7 +419,7 @@ object Form1: TForm1
   object FDQuery12: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'SELECT id FROM stores where name =  :name')
+      'SELECT id FROM stores where name =  :name limit 1')
     Left = 296
     Top = 343
     ParamData = <
@@ -515,25 +515,6 @@ object Form1: TForm1
     ParamData = <
       item
         Name = 'NAME'
-        ParamType = ptInput
-      end>
-  end
-  object FDQuery17: TFDQuery
-    Connection = FDConnection1
-    SQL.Strings = (
-      'INSERT INTO store_items (store_id, item_id)'
-      'SELECT s.id, i.id FROM stores s, items i'
-      'WHERE s.name=:store'
-      'AND i.id=:item_id')
-    Left = 384
-    Top = 192
-    ParamData = <
-      item
-        Name = 'STORE'
-        ParamType = ptInput
-      end
-      item
-        Name = 'ITEM_ID'
         ParamType = ptInput
       end>
   end

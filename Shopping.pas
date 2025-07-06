@@ -59,7 +59,6 @@ type
     Button6: TButton;
     Button7: TButton;
     FDQuery16: TFDQuery;
-    FDQuery17: TFDQuery;
     procedure ShowFirstTab();
     procedure ShowStoreTab(name: string);
     procedure FormCreate(Sender: TObject);
@@ -163,8 +162,9 @@ begin
   try
     FDQuery3.ParamByName('name').AsString := TabControl1.Tabs[index];
     FDQuery3.ExecSQL;
+    FDQuery12.Close;
     FDQuery12.ParamByName('name').AsString := TabControl1.Tabs[index];
-    FDQuery12.ExecSQL;
+    FDQuery12.Open;
     FDQuery10.ParamByName('store_id').AsInteger := FDQuery12.FieldByName('id').AsInteger;
     FDQuery10.ParamByName('item_id').AsInteger := 0;
     FDQuery10.ExecSQL;
@@ -256,18 +256,43 @@ begin
   end;
 end;
 
+// update item
 procedure TForm1.Button6Click(Sender: TObject);
+var
+  price: String;
 begin
   if Edit2.Text = '' then Exit;
   if MessageDlg('Update item?', mtConfirmation, [mbYes, mbNo], 0) in [mrNo, mrCancel] then Exit;
   try
     FDQuery14.ParamByName('name').AsString := Edit2.Text;
     FDQuery14.ParamByName('cat').AsString := Edit3.Text;
-    FDQuery14.ParamByName('price').AsFloat := StrToFloat(Copy(Edit4.Text, 2, Length(Edit4.Text)));
-    FDQuery14.ParamByName('quant').AsInteger := StrToInt(Edit5.Text);
+    FDQuery14.ParamByName('quant').AsInteger := StrToInt(Edit4.Text);
+    if Copy(Edit5.Text, 1, 1) = '$' then
+      price := Copy(Edit5.Text, 2, Length(Edit4.Text))
+    else
+      price := Edit5.Text;
+    FDQuery14.ParamByName('price').AsFloat := StrToFloat(price);
     FDQuery14.ParamByName('note').AsString := Memo1.Text;
-    FDQuery14.ParamByName('id').AsString := GetFieldValue(0);
+    FDQuery14.ParamByName('id').AsInteger := StrToInt(GetFieldValue(0));
     FDQuery14.ExecSQL;
+    if ComboBox1.ItemIndex >= 0 then
+    begin
+      FDQuery12.Close;
+      FDQuery12.ParamByName('name').AsString := ComboBox1.Items[ComboBox1.ItemIndex];
+      FDQuery12.Open;
+      FDQuery15.Close;
+      FDQuery15.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
+      FDQuery15.ParamByName('item').AsInteger := StrToInt(GetFieldValue(0));
+      FDQuery15.Open;
+      if FDQuery12.RecordCount < 1 then
+      begin
+        FDQuery9.ParamByName('store').AsInteger := FDQuery12.FieldByName('id').AsInteger;
+        FDQuery9.ParamByName('item').AsInteger := StrToInt(GetFieldValue(0));
+        FDQuery9.ExecSQL;
+      end
+      else
+        ShowMessage('Item already exists in store.');
+    end;
   except
       on E: Exception do
         ShowMessage('Error updating item: ' + E.Message);
